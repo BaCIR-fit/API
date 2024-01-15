@@ -6,4 +6,12 @@ admin.get('/', function (req, res) {
   res.send('Admin Homepage')
 })
 
-// export admin;
+// return dashboard components
+admin.get('/getDashboard', function (req, res) {
+    let dashboardData = {};
+    res.send(dashboardData)
+  })
+
+
+
+module.exports = admin;
