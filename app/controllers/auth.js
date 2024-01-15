@@ -59,13 +59,13 @@ export async function Login(req, res) {
     const { email } = req.body;
     try {
         // Check if user exists
-        const user = await User.findOne({ email }).select("+password");
+        const user = await User.findOne({ email }).select("+ password");
         if (!user)
             return res.status(401).json({
                 status: "failed",
                 data: [],
                 message:
-                    "Invalid email or password. Please try again with the correct credentials.",
+                    "Invalide email ou mot de passe. Veuillez réessayer avec les bonnes informations de connexion.",
             });
         // if user exists
         // validate password
@@ -79,7 +79,7 @@ export async function Login(req, res) {
                 status: "failed",
                 data: [],
                 message:
-                    "Invalid email or password. Please try again with the correct credentials.",
+                    "Invalide email ou mot de passe. Veuillez réessayer avec les bonnes informations de connexion.",
             });
         // return user info except password
         const { password, ...user_data } = user._doc;
@@ -87,7 +87,7 @@ export async function Login(req, res) {
         res.status(200).json({
             status: "success",
             data: [user_data],
-            message: "You have successfully logged in.",
+            message: "Vous êtes connecté avec succès.",
         });
     } catch (err) {
         res.status(500).json({
