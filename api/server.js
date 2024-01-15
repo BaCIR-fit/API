@@ -19,7 +19,7 @@ const server = express();
 // Allow request from any source. In real production, this should be limited to allowed origins only
 server.use(cors());
 server.disable("x-powered-by"); //Reduce fingerprinting
-// server.use(cookieParser());
+server.use(cookieParser());
 server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
 
