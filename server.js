@@ -14,6 +14,9 @@ import app from "./routes/index.js";
 
 // === 1 - CREATE SERVER ===
 const server = express();
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './docs/swagger.json' with { type: "json" };
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // CONFIGURE HEADER INFORMATION
 // Allow request from any source. In real production, this should be limited to allowed origins only

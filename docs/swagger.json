@@ -1,0 +1,222 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2.0.0",
+    "title": "CloudAgent Apis",
+    "description": "API for Managing queue calls",
+    "contact": {
+      "name": "API Support",
+      "email": "rajputankit22@gmail.com"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Queue CRUD",
+      "description": "Queue related apis"
+    },
+    {
+      "name": "Health",
+      "description": "Health Check"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {},
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "example": "any"
+                },
+                "last_name": {
+                  "example": "any"
+                },
+                "birth_date": {
+                  "example": "any"
+                },
+                "gender": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/editUser": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "example": "any"
+                },
+                "last_name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "gender": {
+                  "example": "any"
+                },
+                "birth_date": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/admin/getAllUsers/{limit}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/admin/getDashboard": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "helathResponse": {
+      "type": "object",
+      "properties": {}
+    },
+    "errorResponse.400": {
+      "type": "object",
+      "properties": {}
+    },
+    "errorResponse.403": {
+      "type": "object",
+      "properties": {}
+    },
+    "errorResponse.404": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "404"
+        },
+        "message": {
+          "type": "string",
+          "example": "Not found"
+        }
+      }
+    },
+    "errorResponse.500": {
+      "type": "object",
+      "properties": {}
+    }
+  }
+}

@@ -1,12 +1,12 @@
 import express from "express";
-import { Register } from "../controllers/auth.js";
+import { Register,Login } from "../controllers/auth.js";
 import Validate from "../middleware/validate.js";
 import { check } from "express-validator";
 
-const router = express.Router();
+const authRouter = express.Router();
 
 // Register route -- POST request
-router.post(
+authRouter.post(
     "/register",
     check("email")
         .isEmail()
@@ -45,7 +45,7 @@ router.post(
 );
 
 // Login route == POST request
-router.post(
+authRouter.post(
     "/login",
     check("email")
         .isEmail()
@@ -56,4 +56,4 @@ router.post(
     Login
 );
 
-export default router;
+export default authRouter;
