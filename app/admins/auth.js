@@ -8,13 +8,16 @@ admin.get('/', function (req, res) {
   res.send('{}')
 })
 
+admin.post("/login",function(req,res){
+    let username = req.body.username;
+    let password = req.body.password;
+
+})
 // return dashboard components
 admin.get('/getDashboard', function (req, res) {
     let dashboardData = {};
     res.json(dashboardData)
   })
-
-
 
 
 module.exports = admin;
