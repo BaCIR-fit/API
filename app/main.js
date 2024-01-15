@@ -2,14 +2,17 @@ const express = require('express')
 const app = express()
 const port = 3000
 var hash = require('pbkdf2-password')()
+import Auth from './auth.js';
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+
+
+
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use('/admin',require('./admins/admin'));
+app.use('/v1/auth',Auth)
+
+// app.use('/admin',require('./admins/admin'));
 
 
 app.listen(port, () => {
