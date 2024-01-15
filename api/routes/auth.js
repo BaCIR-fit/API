@@ -10,24 +10,36 @@ router.post(
     "/register",
     check("email")
         .isEmail()
-        .withMessage("Enter a valid email address")
+        .withMessage("Entrez un mail valide.")
         .normalizeEmail(),
     check("first_name")
         .not()
         .isEmpty()
-        .withMessage("You first name is required")
+        .withMessage("Votre nom est requis")
         .trim()
         .escape(),
     check("last_name")
         .not()
         .isEmpty()
-        .withMessage("You last name is required")
+        .withMessage("Votre prénom est requis")
+        .trim()
+        .escape(),
+    check("birth_date")
+        .not()
+        .isEmpty()
+        .withMessage("Votre date de naissance est requise")
+        .trim()
+        .escape(),
+    check("Gender")
+        .not()
+        .isEmpty()
+        .withMessage("Votre genre est requis")
         .trim()
         .escape(),
     check("password")
         .notEmpty()
         .isLength({ min: 8 })
-        .withMessage("Must be at least 8 chars long"),
+        .withMessage("Doit être de 8 charactères minimum"),
     Validate,
     Register
 );
@@ -37,7 +49,7 @@ router.post(
     "/login",
     check("email")
         .isEmail()
-        .withMessage("Enter a valid email address")
+        .withMessage("Entrez un mail valide")
         .normalizeEmail(),
     check("password").not().isEmpty(),
     Validate,

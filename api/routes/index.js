@@ -4,7 +4,7 @@ const app = express(); // Create an app object
 
 app.disable("x-powered-by"); // Reduce fingerprinting (optional)
 // home route with the get method and a handler
-app.get("/v1", (req, res) => {
+app.get("/", (req, res) => {
     try {
         res.status(200).json({
             status: "success",
