@@ -11,7 +11,7 @@ export async function Register(req, res) {
     const { first_name, last_name, birth_date, gender, email, password} = req.body;
     try {
         // create an instance of a user
-        const newUser = new User({
+        const newUser = new Utilisateur({
             first_name,
             last_name,
             birth_date,
@@ -38,7 +38,7 @@ export async function Register(req, res) {
     } catch (err) {
         res.status(500).json({
             status: "error",
-            code: 500,
+            code: 500,  
             data: [],
             message: "Internal Server Error",
         });
