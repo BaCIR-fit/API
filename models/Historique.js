@@ -5,6 +5,10 @@ const HistoriqueSchema = new mongoose.Schema(
         workout_date: {
             type: Date,
             required: "Your Historique_id is required",
+            unique: true,
+            lowercase: true,
+            trim: true,
+            default:"12-12-2023"
         },
         workout_time: {
             type: timestamps,
@@ -25,22 +29,10 @@ const HistoriqueSchema = new mongoose.Schema(
             required: "Your User_id is required",
         },
     },
-    { timestamps: true }
+    { 
+        timestamps: true 
+    }
 );
 
-// ActivitySchema.pre("save", function (next) {
-//     const activity = this;
-//     if (!activity.isModified("password")) return next();
-//     bcrypt.genSalt(10, (err, salt) => {
-//         if (err) return next(err);
-
-//         bcrypt.hash(user.password, salt, (err, hash) => {
-//             if (err) return next(err);
-
-//             user.password = hash;
-//             next();
-//         });
-//     });
-// });
 
 export default mongoose.model("Historique", HistoriqueSchema);

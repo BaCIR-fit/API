@@ -2,7 +2,8 @@ import express from "express";
 import { Register,Login } from "../controllers/auth.js";
 import Validate from "../middleware/validate.js";
 import { check } from "express-validator";
-
+import { Edit } from "../controllers/auth.js";
+import { Logout } from "../controllers/auth.js";
 const authRouter = express.Router();
 
 // Register route -- POST request
@@ -30,7 +31,7 @@ authRouter.post(
         .withMessage("Votre date de naissance est requise")
         .trim()
         .escape(),
-    check("Gender")
+    check("gender")
         .not()
         .isEmpty()
         .withMessage("Votre genre est requis")
@@ -55,5 +56,10 @@ authRouter.post(
     Validate,
     Login
 );
+
+
+
+// Logout route == GET request
+authRouter.get("/logout", Logout);
 
 export default authRouter;

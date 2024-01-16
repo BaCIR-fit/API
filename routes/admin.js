@@ -1,81 +1,52 @@
 import express from "express";
-import { Register,Login } from "../controllers/auth.js";
-import Validate from "../middleware/validate.js";
-import { check } from "express-validator";
+import { Verify,VerifyRole } from "../middleware/verify.js";
 import users from "../models/User.js";
-// import utilisateurs from "../models/User2.js"
-import activities from "../models/Activity.js";
 
-import bodyParser from 'body-parser'
+
 const adminRouter = express.Router();
 
-// // manage user
-// adminRouter.post("/editUser", async function(req, res){
-//     try{
-//         // modifie les informations du client, sauf le mot de passe
-//         data = await users.find({ id: req.session.passport.user})
-//         users.update({id:data.id},{first_name:req.body.first_name, last_name:req.body.last_name, 
-//         email:req.body.email, gender:req.body.gender, birth_date:req.body.birth_date},
-//         (err,user)=>{
-//             return res.status(400).json({
-//                 status: "failed",
-//                 data: [user],
-//                 message: "Erreur lors de la modification des informations" 
-//                 + err,
-//             });
-//         });   
-//     }
-//     catch{
-//         return res.status(400).json({
-//             status: "failed",
-//             data: ["error "],
-//             message: "Erreur lors de la modification des informations" 
-//             // + err,
-//         });
-//     }
-   
-// })
 
-
-adminRouter.get("/getAllUsers/:limit",async function(req,res){
-    // récupère tous les utilisateurs
-    try{
-        // let act = new activities();
-        // activities.create(act).then((res) => {
-            console.log("here")
-            activities.find({}).then((data) => {
-                console.log("data : ",data)
-                return res.status(200).json({
-                    status: "Success",
-                    data: [data],
-                    message: "All users" 
-                })
-            }).catch((err) => {
-                console.log(err)
-            })
-        // })
-        
+// default admin page
+adminRouter.get("/",Verify,VerifyRole, (req,res) => {
+    try {
+        res.status(200).json({
+            status: "success",
+            message: "Welcome to our admin API!",
+        });
     } catch (err) {
+        res.status(500).json({
+            status: "error",
+            message: "Internal Server Error : "+err,
+        });
+    }
+});
+
+// fetch all user data given a limit 
+adminRouter.get("/getAllUsers/:limit",async function(req,res){
+    // récupère tous les users
+    users.find({}).limit(req.params.limit).then((data) => {
+        console.log("data : ",data)
+        return res.status(200).json({
+            status: "Success",
+            data: data,
+            message: "All users" 
+        })
+    }).catch((err) => {
+        console.log(err)
         return res.status(400).json({
             status: "failed",
-            // data: [data],
-            message: "Erreur lors de la récupération des utilisateurs" 
+            message: "Erreur lors de la récupération des users " 
             + err,
-        })    
+        })
+    })
+});
 
-    }
-    // let collection = await db.collection("activities");
-    // let results = await collection.find({}) 
-    // .limit(50)
-    // .toArray();
-    // res.json(results).status(200);
-    // res.json(data);
-    });
-
-// dashboard
-adminRouter.get("/getDashboard",function(req,res){
+// fetch all dashboard information
+adminRouter.get("/getDashboard",Verify,VerifyRole,function(req,res){
     //STATS
     // stats daily/monthly/yearly
+    
+    //get tte les activités
     
     // SALLES
     // nb de sportifs/salle/club en tps réel 
@@ -87,7 +58,7 @@ adminRouter.get("/getDashboard",function(req,res){
     // PLANING
 })
 
-
+// manage activities
 
 // Activity route -- POST request
 // adminRouter.post(

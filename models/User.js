@@ -1,59 +1,68 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken';
+import { SECRET_ACCESS_TOKEN } from '../config/index.js';
 
 const UserSchema = new mongoose.Schema(
     {
-        user_firstname: {
+        first_name: {
             type: String,
-            required: "Your User_firstname is required",
+            required: "Your first_name is required",
+            default:"fname",
             max: 25,
         },
-        user_surname: {
+        last_name: {
             type: String,
-            required: "Your User_surname is required",
+            required: "Your last_name is required",
+            default:"sname",
             max: 25,
         },
-        user_birth: {
+        birth_date: {
             type: Date,
-            required: "Your User_birth is required",
-            unique: true,
+            required: "Your birth_date is required",
+            default:"1960-08-05T00:00:00.000Z",
             lowercase: true,
             trim: true,
         },
-        historiques: {
+        logs: {
             type: Array,
-            required: "Your Historiques is required",
+            required: "Your logs are required",
             select: false,
-            default: "[]"
+            default: []
         },
         isAdmin: {
             type: Boolean,
             required: true,
             default: false,
         },
-        user_activity: {
+        isActive: {
             type: Boolean,
             required: true,
             default: false,
         },
-        user_gender: {
+        gender: {
             type: String,
-            required: "Your User_gender is required",
-            max: 25,
+            required: "Your gender is required",
+            max: 10,
+            default:"Male"
         },
-        user_mail: {
+        email: {
             type: String,
-            required: "Your mail is required",
+            required: "Your email is required",
             max: 25,
+            unique:true,
+            default:"verybademail@gmail.com"
         },
         password: {
             type: String,
             required: "Your password is required",
-            select: false,
-            max: 25,
+            select: true,
+            max: 64,
         },
     },
-    { timestamps: true }
+    { 
+        timestamps: true 
+    }
 );
 
 UserSchema.pre("save", function (next) {
@@ -72,4 +81,13 @@ UserSchema.pre("save", function (next) {
     });
 });
 
-export default mongoose.model("users", UserSchema);
+UserSchema.methods.generateAccessJWT = function () {
+    let payload = {
+      id: this._id,
+    };
+    return jwt.sign(payload, SECRET_ACCESS_TOKEN, {
+      expiresIn: '20m',
+    });
+  };
+
+export default mongoose.model("users", UserSchema,"users");

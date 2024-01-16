@@ -30,7 +30,9 @@ const RoomSchema = new mongoose.Schema(
             required: "Your Room_name is required",
         },
     },
-    { timestamps: true }
+    { 
+        timestamps: true 
+    }
 );
 
 
