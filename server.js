@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import { PORT, URI } from "./config/index.js";
 //let PORT = 3000;
 import app from "./routes/index.js";
+console.log(PORT,URI)
 
 // === 1 - CREATE SERVER + SWAGGER ===
 const server = express();
@@ -37,6 +38,7 @@ mongoose
 server.use(app);
 
 // === 5 - START UP SERVER ===
+console.log(PORT)
 server.listen(PORT, () =>
     console.log(`Server running on http://localhost:${PORT}`)
 );
