@@ -43,7 +43,7 @@ adminRouter.get("/getAllUsers/:limit",async function(req,res){
         // let act = new activities();
         // activities.create(act).then((res) => {
             console.log("here")
-            activities.find({activity_name:"crossfit"}).then((data) => {
+            activities.find({}).then((data) => {
                 console.log("data : ",data)
                 return res.status(200).json({
                     status: "Success",
