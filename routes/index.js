@@ -4,9 +4,6 @@ import adminRouter from "./admin.js";
 import activityRoute from "./activity.js";
 import { Verify } from "../middleware/verify.js";
 const app = express(); // Create an app object
-app.use('/auth', authRouter);
-app.use('/admin', adminRouter);
-app.use('/activity', activityRoute);
 
 
 // home route with the get method and a handler

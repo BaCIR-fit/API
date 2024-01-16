@@ -9,18 +9,14 @@ const InventaireSchema = new mongoose.Schema(
         },
         unity_furniture: {
             type: String,
-            required: "Your Coach_name is required",
+            required: "Your unity_furniture is required",
             max: 25,
-            default:"coachtest"
+            default:0
         },
         room: {
-            type: Date,
-            required: "Your Activity_date is required",
+            type: String,
+            required: "Your room is required",
             unique: true,
-            lowercase: true,
-            trim: true,
-            default:"12-12-2023"
-
         },
     },
 );

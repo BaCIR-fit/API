@@ -3,9 +3,9 @@ const options = {
     openapi: 'null',   // Enable/Disable OpenAPI. By default is null
     language: 'en-US',      // Change response language. By default is 'en-US'
     disableLogs: false,     // Enable/Disable logs. By default is false
-    autoHeaders: false,     // Enable/Disable automatic headers capture. By default is true
+    autoHeaders: true,     // Enable/Disable automatic headers capture. By default is true
     autoQuery: false,       // Enable/Disable automatic query capture. By default is true
-    autoBody: false         // Enable/Disable automatic body capture. By default is true
+    autoBody: true         // Enable/Disable automatic body capture. By default is true
 }
 
 // import config  from '../config/cloud';
@@ -69,7 +69,7 @@ const doc = {
 };
 
 const outputFile = './docs/swagger.json';
-const endpointsFiles = ['./server.js', './controllers/*.js'];
+const endpointsFiles = ['./server.js', './controllers/*'];
 
 /* NOTE: if you use the express Router, you must pass in the 
    'endpointsFiles' only the root file where the route starts,

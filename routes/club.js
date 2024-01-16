@@ -16,7 +16,7 @@ const clubRouter = express.Router();
 
 
 
-// Get club == GET request
+// Get club by id == GET request
 
 
 
