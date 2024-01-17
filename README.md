@@ -1,4 +1,4 @@
-# FitClub
+# BACIR FIT
 
 ## installation
 Installer les dépendances
