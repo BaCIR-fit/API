@@ -36,7 +36,7 @@ activityRouter.post(
 
     Validate,
     AddActivity
-    //#swagger.tags = ['admin/activity']
+     //#swagger.tags = ['Admin/Activity']
 
 );
 
@@ -81,7 +81,7 @@ activityRouter.post(
         .escape(),
     Validate,
     EditActivity
-    //#swagger.tags = ['admin/activity']
+     //#swagger.tags = ['Admin/Activity']
 
 );
 
@@ -90,7 +90,7 @@ activityRouter.get(
     "/delete/:id",Verify,VerifyRole,
     Validate, 
     DeleteActivity
-    //#swagger.tags = ['admin/activity']
+     //#swagger.tags = ['Admin/Activity']
 );
 
 

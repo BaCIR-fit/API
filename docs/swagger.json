@@ -1,20 +1,20 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2.0.0",
-    "title": "CloudAgent Apis",
-    "description": "API for Managing queue calls",
-    "contact": {
-      "name": "API Support",
-      "email": "rajputankit22@gmail.com"
-    }
+    "title": "REST API",
+    "description": "API for basic cir blabla",
+    "version": "1.0.0"
   },
   "host": "localhost:3000",
   "basePath": "/",
   "tags": [
     {
-      "name": "Queue CRUD",
+      "name": "Admin/",
       "description": "Queue related apis"
+    },
+    {
+      "name": "Admin/Activity",
+      "description": "Activity based endpoints"
     },
     {
       "name": "Health",
@@ -168,12 +168,12 @@
     "/admin/": {
       "get": {
         "tags": [
-          "admin/"
+          "Admin/"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "cookie",
+            "name": "x-api-key",
             "in": "header",
             "type": "string"
           }
@@ -194,7 +194,7 @@
     "/admin/getAllUsers/{limit}": {
       "get": {
         "tags": [
-          "admin/"
+          "Admin/"
         ],
         "description": "",
         "parameters": [
@@ -202,6 +202,11 @@
             "name": "limit",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
             "type": "string"
           }
         ],
@@ -211,6 +216,12 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -218,17 +229,20 @@
     "/admin/getDashboard": {
       "get": {
         "tags": [
-          "admin/"
+          "Admin/"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "cookie",
+            "name": "x-api-key",
             "in": "header",
             "type": "string"
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Unauthorized"
           },
@@ -241,7 +255,7 @@
     "/admin/activity/add": {
       "post": {
         "tags": [
-          "admin/activity"
+          "Admin/Activity"
         ],
         "description": "",
         "parameters": [
@@ -291,7 +305,7 @@
     "/admin/activity/edit/{id}": {
       "post": {
         "tags": [
-          "admin/activity"
+          "Admin/Activity"
         ],
         "description": "",
         "parameters": [
@@ -353,7 +367,7 @@
     "/admin/activity/delete/{id}": {
       "get": {
         "tags": [
-          "admin/activity"
+          "Admin/Activity"
         ],
         "description": "",
         "parameters": [
@@ -676,7 +690,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "cookie",
+            "name": "x-api-key",
             "in": "header",
             "type": "string"
           },
@@ -729,7 +743,7 @@
             "type": "string"
           },
           {
-            "name": "cookie",
+            "name": "x-api-key",
             "in": "header",
             "type": "string"
           },
@@ -768,6 +782,120 @@
         }
       }
     },
+    "/admin/rooms/increment/{id}": {
+      "get": {
+        "tags": [
+          "admin/rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/rooms/decrement/{id}": {
+      "get": {
+        "tags": [
+          "admin/rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/rooms/reset/{id}": {
+      "get": {
+        "tags": [
+          "admin/rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/admin/rooms/getInventory/{id}": {
+      "get": {
+        "tags": [
+          "admin/rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/admin/rooms/getNbInventory/{id}": {
+      "get": {
+        "tags": [
+          "admin/rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/admin/rooms/updateInventory/{id}": {
       "post": {
         "tags": [
@@ -779,6 +907,11 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
             "type": "string"
           },
           {
@@ -800,6 +933,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"

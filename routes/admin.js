@@ -26,7 +26,7 @@ adminApp.get("/",VerifyAdmin, (req,res) => {
             message: "Internal Server Error : "+err,
         });
     }
-    //#swagger.tags = ['admin/']
+    //#swagger.tags = ['Admin/']
 });
 
 
@@ -47,10 +47,12 @@ adminApp.get("/getAllUsers/:limit",VerifyAdmin,async function(req,res){
             message: "Erreur lors de la récupération des users " + err,
         })
     })
-    //#swagger.tags = ['admin/']
+    //#swagger.tags = ['Admin/']
 });
 
-adminApp.get("/getDashboard" ,VerifyAdmin ,getDashboard);
+adminApp.get("/getDashboard" ,VerifyAdmin ,getDashboard,
+    //#swagger.tags = ['Admin/']
+    );
 
 // manage activities
 

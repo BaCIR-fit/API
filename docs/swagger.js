@@ -19,13 +19,8 @@ import swaggerAutogen from 'swagger-autogen';
 
 const doc = {
   info: {
-    version: '2.0.0',      // by default: '1.0.0'
-    title: 'CloudAgent Apis',        // by default: 'REST API'
-    description: 'API for Managing queue calls',  // by default: ''
-    contact: {
-        'name': 'API Support',
-        'email': 'rajputankit22@gmail.com'
-    },
+    title: 'REST API',
+    description: 'API for basic cir blabla',  // by default: ''
   },
   // host: config.swagger.host,      // by default: 'localhost:3000'
   host:'localhost:3000',
@@ -35,8 +30,12 @@ const doc = {
   produces: ['application/json'],  // by default: ['application/json']
   tags: [        // by default: empty Array
     {
-      name: 'Queue CRUD',         // Tag name
-      description: 'Queue related apis',  // Tag description
+      name: 'Admin/',         // Tag name
+      description: 'admin\'s endpoints',  // Tag description
+    },
+    {
+      name: 'Admin/Activity',         // Tag name
+      description: 'Activity based endpoints',  // Tag description
     },
     {
         name: 'Health',
