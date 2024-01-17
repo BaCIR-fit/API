@@ -2,14 +2,32 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
-import authRouter from './routes/auth.js';
-import adminRouter from "./routes/admin.js";
-import activityRoute from "./routes/activity.js";
 import { PORT, URI } from "./config/index.js"; // get the env vars from config dotenv
 import app from "./routes/index.js";
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './docs/swagger.json' with { type: "json" };
+// import swaggerJSDoc from "swagger-jsdoc";
+
+
+// const swaggerDefinition = {
+//     openapi: '3.0.0',
+//     info: {
+//       title: 'Express API for JSONPlaceholder',
+//       version: '1.0.0',
+//     },
+//   };
+  
+//   const options = {
+//     swaggerDefinition,
+//     // Paths to files containing OpenAPI definitions
+//     apis: ['./routes/*.js'],
+//   };
+// const swaggerSpec = swaggerJSDoc(options);
+  
 
 // === 1 - CREATE SERVER + SWAGGER DOC ===
 const server = express();
+server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 // CONFIGURE HEADER INFORMATION
@@ -31,16 +49,6 @@ mongoose.connect(URI)
 // === 4 - CONFIGURE ROUTES ===
 // Connect Main route to server
 server.use(app);
-
-
-import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from './docs/swagger.json' with { type: "json" };
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-
-app.use('/auth', authRouter);
-app.use('/admin', adminRouter);
-app.use('/activity', activityRoute);
 
 // === 5 - START UP SERVER ===
 server.listen(PORT, () =>

@@ -8,7 +8,6 @@ const HistoriqueSchema = new mongoose.Schema(
             unique: true,
             lowercase: true,
             trim: true,
-            default:"12-12-2023"
         },
         workout_time: {
             type: timestamps,

@@ -57,6 +57,9 @@
     },
     "/auth/register": {
       "post": {
+        "tags": [
+          "auth/"
+        ],
         "description": "",
         "parameters": [
           {
@@ -102,6 +105,9 @@
     },
     "/auth/login": {
       "post": {
+        "tags": [
+          "auth/"
+        ],
         "description": "",
         "parameters": [
           {
@@ -135,6 +141,9 @@
     },
     "/auth/logout": {
       "get": {
+        "tags": [
+          "auth/"
+        ],
         "description": "",
         "parameters": [
           {
@@ -158,6 +167,9 @@
     },
     "/admin/": {
       "get": {
+        "tags": [
+          "admin/"
+        ],
         "description": "",
         "parameters": [
           {
@@ -181,6 +193,9 @@
     },
     "/admin/getAllUsers/{limit}": {
       "get": {
+        "tags": [
+          "admin/"
+        ],
         "description": "",
         "parameters": [
           {
@@ -202,6 +217,9 @@
     },
     "/admin/getDashboard": {
       "get": {
+        "tags": [
+          "admin/"
+        ],
         "description": "",
         "parameters": [
           {
@@ -220,8 +238,11 @@
         }
       }
     },
-    "/activity/add": {
+    "/admin/activity/add": {
       "post": {
+        "tags": [
+          "admin/activity"
+        ],
         "description": "",
         "parameters": [
           {
@@ -267,8 +288,11 @@
         }
       }
     },
-    "/activity/edit/{id}": {
+    "/admin/activity/edit/{id}": {
       "post": {
+        "tags": [
+          "admin/activity"
+        ],
         "description": "",
         "parameters": [
           {
@@ -326,8 +350,11 @@
         }
       }
     },
-    "/activity/delete/{id}": {
+    "/admin/activity/delete/{id}": {
       "get": {
+        "tags": [
+          "admin/activity"
+        ],
         "description": "",
         "parameters": [
           {
@@ -351,6 +378,409 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/clubs/addClub": {
+      "post": {
+        "tags": [
+          "admin/clubs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "cookie",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "club_name": {
+                  "example": "any"
+                },
+                "club_manager": {
+                  "example": "any"
+                },
+                "adress": {
+                  "example": "any"
+                },
+                "longitude": {
+                  "example": "any"
+                },
+                "latitude": {
+                  "example": "any"
+                },
+                "room_number": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/clubs/editClub": {
+      "post": {
+        "tags": [
+          "admin/clubs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "cookie",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "club_name": {
+                  "example": "any"
+                },
+                "club_manager": {
+                  "example": "any"
+                },
+                "adress": {
+                  "example": "any"
+                },
+                "latitude": {
+                  "example": "any"
+                },
+                "longitude": {
+                  "example": "any"
+                },
+                "room_number": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/clubs/deleteClub/{id}": {
+      "get": {
+        "tags": [
+          "admin/clubs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cookie",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/clubs/getClubById/{id}": {
+      "get": {
+        "tags": [
+          "admin/clubs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cookie",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/clubs/getAllCubs/{limit}": {
+      "get": {
+        "tags": [
+          "admin/clubs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cookie",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/rooms/getAllRoom/{limit}": {
+      "get": {
+        "tags": [
+          "admin/rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/admin/rooms/getRoom/{id}": {
+      "get": {
+        "tags": [
+          "admin/rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/admin/rooms/getRoomsClub/{id}": {
+      "get": {
+        "tags": [
+          "admin/rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/admin/rooms/add": {
+      "post": {
+        "tags": [
+          "admin/rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "club_id": {
+                  "example": "any"
+                },
+                "room_name": {
+                  "example": "any"
+                },
+                "max_capacity": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/rooms/edit/{id}": {
+      "post": {
+        "tags": [
+          "admin/rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "room_name": {
+                  "example": "any"
+                },
+                "max_capacity": {
+                  "example": "any"
+                },
+                "inventory": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/admin/rooms/updateInventory/{id}": {
+      "post": {
+        "tags": [
+          "admin/rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "inventory": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"

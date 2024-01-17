@@ -6,7 +6,6 @@ import { Edit } from "../controllers/auth.js";
 import { Logout } from "../controllers/auth.js";
 const authRouter = express.Router();
 
-// Register route -- POST request
 authRouter.post(
     "/register",
     check("email")
@@ -42,10 +41,11 @@ authRouter.post(
         .isLength({ min: 8 })
         .withMessage("Doit être de 8 charactères minimum"),
     Validate,
-    Register
+    Register,
+    // #swagger.tags = ['auth/']
+
 );
 
-// Login route == POST request
 authRouter.post(
     "/login",
     check("email")
@@ -54,12 +54,13 @@ authRouter.post(
         .normalizeEmail(),
     check("password").not().isEmpty(),
     Validate,
-    Login
+    Login,
+    // #swagger.tags = ['auth/']
+
 );
 
 
-
-// Logout route == GET request
-authRouter.get("/logout", Logout);
+authRouter.get("/logout", Logout,// #swagger.tags = ['auth/']
+);
 
 export default authRouter;

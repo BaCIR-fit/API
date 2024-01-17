@@ -2,33 +2,35 @@ import mongoose from "mongoose";
 
 const RoomSchema = new mongoose.Schema(
     {
-        max_room_capacity: {
-            type: Int,
-            required: "Your Max_room_capacity is required",
-        },
-        actual_room_capacity: {
-            type: Int,
-            required: "Your Actual_room_capacity is required",
-        },
-        activities: {
-            type: Array,
-            required: "Your ACtivities is required",
-            default: [],
-        },
-        inventaires: {
-            type: Array,
-            required: "Your Inventaires is required",
-            select: false,
-            default: [],
-        },
-        localisation: {
+        club_id: {
             type: String,
-            required: "Your Localisation is required",
+            required: "The club_id is required",
         },
         room_name: {
             type: String,
-            required: "Your Room_name is required",
+            required: "The room_name is required",
         },
+        max_capacity: {
+            type: Number,
+            required: "Your Max_room_capacity is required",
+            default: 30
+        },
+        actual_capacity: {
+            type: Number,
+            required: "actual_capacity is required",
+            default: 0
+        },
+        activities: {
+            type: Array,
+            required: "Your Activities are required",
+            default: [],
+        },
+        inventory: {
+            type: Array,
+            required: "Inventory is required",
+            select: false,
+            default: [],
+        }
     },
     { 
         timestamps: true 

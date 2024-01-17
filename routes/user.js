@@ -38,4 +38,17 @@ userRouter.post(
         .escape(),
     Validate,
     Edit
+    //#swagger.tags = ['users/']
 )
+
+// Get history route == GET request
+
+// update history route == POST request
+
+// Get user infos route == GET request
+
+
+
+
+
+export default userRouter;

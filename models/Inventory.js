@@ -22,4 +22,4 @@ const InventaireSchema = new mongoose.Schema(
 );
 
 
-export default mongoose.model("activities", InventaireSchema);
+export default mongoose.model("inventory", InventaireSchema);

@@ -2,16 +2,30 @@ import mongoose from "mongoose";
 
 const ClubsSchema = new mongoose.Schema(
     {
-        club_id: {
-            type: Int,
-            required: "Your club_id is required",
-        },
         club_name: {
             type: String,
-            required: "Your club_name is required",
+            required: "The club_name is required",
+            unique:true
         },
-        number_room: {
-            type: BigInt,
+        club_manager: {
+            type: String,
+            required: "A manager is required",
+            default:"ProductOwner"
+        },
+        adress:{
+            type:String,
+            required:"Adress is required"
+        },
+        latitude:{
+            type:String,
+            required:"latitude coords are required"
+        },
+        longitude:{
+            type:String,
+            required:"longitude coords are required"
+        },
+        room_number: {
+            type: Number,
             required: true,
             default: "0",
         },
@@ -22,4 +36,4 @@ const ClubsSchema = new mongoose.Schema(
 );
 
 
-export default mongoose.model("clubs", ClubsSchema);
+export default mongoose.model("clubs", ClubsSchema,"clubs");

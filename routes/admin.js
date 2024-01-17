@@ -1,13 +1,20 @@
 import express from "express";
 import { Verify,VerifyRole } from "../middleware/verify.js";
 import users from "../models/User.js";
+import activityRoute from "./activity.js";
+import clubRouter from "./club.js";
+import roomRouter from "./room.js";
+import { getDashboard } from "../controllers/admin.js";
 
+const adminApp = express();
 
-const adminRouter = express.Router();
+adminApp.use('/activity', activityRoute);
+adminApp.use("/clubs",clubRouter);
+adminApp.use("/rooms",roomRouter);
 
 
 // default admin page
-adminRouter.get("/",Verify,VerifyRole, (req,res) => {
+adminApp.get("/",Verify,VerifyRole, (req,res) => {
     try {
         res.status(200).json({
             status: "success",
@@ -19,10 +26,12 @@ adminRouter.get("/",Verify,VerifyRole, (req,res) => {
             message: "Internal Server Error : "+err,
         });
     }
+    //#swagger.tags = ['admin/']
 });
 
-// fetch all user data given a limit 
-adminRouter.get("/getAllUsers/:limit",async function(req,res){
+
+
+adminApp.get("/getAllUsers/:limit",async function(req,res){
     // récupère tous les users
     users.find({}).limit(req.params.limit).then((data) => {
         console.log("data : ",data)
@@ -39,24 +48,12 @@ adminRouter.get("/getAllUsers/:limit",async function(req,res){
             + err,
         })
     })
+    //#swagger.tags = ['admin/']
 });
 
-// fetch all dashboard information
-adminRouter.get("/getDashboard",Verify,VerifyRole,function(req,res){
-    //STATS
-    // stats daily/monthly/yearly
-    
-    //get tte les activités
-    
-    // SALLES
-    // nb de sportifs/salle/club en tps réel 
-    // like {club1:{salle1:{nbuser:0}}}
-    // FIN SALLES
-
-    // PLANNING
-    //récup les plannings à x horizon de temps
-    // PLANING
-})
+adminApp.get("/getDashboard",Verify
+    // ,VerifyRole
+    ,getDashboard);
 
 // manage activities
 
@@ -68,6 +65,8 @@ adminRouter.get("/getDashboard",Verify,VerifyRole,function(req,res){
 //     AddActivity
 // );
 
-
-
-export default adminRouter;
+// /admin/*
+// /admin/clubs/etc
+// 
+// 
+export default adminApp;

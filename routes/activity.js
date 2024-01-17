@@ -36,6 +36,8 @@ activityRouter.post(
 
     Validate,
     AddActivity
+    //#swagger.tags = ['admin/activity']
+
 );
 
 // Edit route == POST request
@@ -79,6 +81,8 @@ activityRouter.post(
         .escape(),
     Validate,
     EditActivity
+    //#swagger.tags = ['admin/activity']
+
 );
 
 // delete route == GET request
@@ -86,6 +90,7 @@ activityRouter.get(
     "/delete/:id",Verify,VerifyRole,
     Validate, 
     DeleteActivity
+    //#swagger.tags = ['admin/activity']
 );
 
 
