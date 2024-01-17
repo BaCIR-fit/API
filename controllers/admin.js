@@ -38,7 +38,7 @@ export async function getDashboard(req,res){
     }
 
     return res.status(200).json({
-        status: "failed",
+        status: "ok",
         data:dashboard_data,
     })
 

@@ -49,12 +49,10 @@ export function VerifyAdmin(req, res, next) {
         // console.log(req.)
         // check if user has no advance privileges
         // return an unathorized response
-        const authHeader = req.headers["cookie"]; // get the session cookie from request header
-
+        const authHeader = req.header("x-api-key"); // get the session cookie from request header
+        console.log(authHeader)
         if (!authHeader) return res.sendStatus(401); // if there is no cookie from request header, send an unauthorized response.
-        const cookie = authHeader.split("=")[1]; // If there is, split the cookie string to get the actual jwt
-
-        const token = cookie.split(";")[0];
+        let token = authHeader
         if (token != API_KEY ) {
             return res.status(401).json({
                 status: "failed",
