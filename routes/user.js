@@ -89,11 +89,10 @@ userRouter.get(
 )
 
 userRouter.get(
-    "/addUserActivity/:id1/:id2",
+    "/addUserActivity/:idUser/:idActivity",
     addUserActivity
     //#swagger.tags = ['Users/']
 )
-
 
 
 export default userRouter;

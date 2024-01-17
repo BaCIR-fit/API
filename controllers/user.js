@@ -70,14 +70,14 @@ export async function getUser(req, res){
 
 
 /**
- * @route get v1/user/addUserActivity/:id1/:id2/
+ * @route get v1/user/addUserActivity/:idUser/:idActivity/
  * @desc add activity to user and increment activity and room
  * @access Public
  */
 export async function addUserActivity(req, res){
-    users.findOne({_id: req.params.id1})
+    users.findOne({_id: req.params.idUser})
     .then(user => {
-        activities.findOne({_id: req.params.id2})
+        activities.findOne({_id: req.params.idActivity})
         .then(activity => {
             addLog(user._id, req.body);
             incrementActivity(activity._id);
