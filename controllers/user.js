@@ -81,7 +81,7 @@ export async function addUserActivity(req, res){
         .then(activity => {
             addLog(user._id, req.body);
             incrementActivity(activity._id);
-            incrementRoom(activity.room);
+            incrementRoom(activity.room_id);
 
             return res.status(200).json({
                 status: "success",
