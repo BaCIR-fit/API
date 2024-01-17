@@ -14,7 +14,7 @@ adminApp.use("/rooms",roomRouter);
 
 
 // default admin page
-adminApp.get("/",Verify,VerifyRole, (req,res) => {
+adminApp.get("/",VerifyAdmin, (req,res) => {
     try {
         res.status(200).json({
             status: "success",
@@ -26,12 +26,12 @@ adminApp.get("/",Verify,VerifyRole, (req,res) => {
             message: "Internal Server Error : "+err,
         });
     }
-    //#swagger.tags = ['admin/']
+    //#swagger.tags = ['Admin/']
 });
 
 
 
-adminApp.get("/getAllUsers/:limit",async function(req,res){
+adminApp.get("/getAllUsers/:limit",VerifyAdmin,async function(req,res){
     // récupère tous les users
     users.find({}).limit(req.params.limit).then((data) => {
         console.log("data : ",data)
@@ -44,16 +44,15 @@ adminApp.get("/getAllUsers/:limit",async function(req,res){
         console.log(err)
         return res.status(400).json({
             status: "failed",
-            message: "Erreur lors de la récupération des users " 
-            + err,
+            message: "Erreur lors de la récupération des users " + err,
         })
     })
-    //#swagger.tags = ['admin/']
+    //#swagger.tags = ['Admin/']
 });
 
-adminApp.get("/getDashboard"
-    ,VerifyAdmin
-    ,getDashboard);
+adminApp.get("/getDashboard" ,VerifyAdmin ,getDashboard,
+    //#swagger.tags = ['Admin/']
+    );
 
 // manage activities
 

@@ -1,24 +1,40 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2.0.0",
-    "title": "CloudAgent Apis",
-    "description": "API for Managing queue calls",
-    "contact": {
-      "name": "API Support",
-      "email": "rajputankit22@gmail.com"
-    }
+    "title": "Basic Cir API",
+    "description": "API for basic cir blabla",
+    "version": "1.0.0"
   },
   "host": "localhost:3000",
   "basePath": "/",
   "tags": [
     {
-      "name": "Queue CRUD",
-      "description": "Queue related apis"
+      "name": "default",
+      "description": "base path"
     },
     {
-      "name": "Health",
-      "description": "Health Check"
+      "name": "Auth/",
+      "description": "Authentication relative's endpoints"
+    },
+    {
+      "name": "Users/",
+      "description": "public user endpoints"
+    },
+    {
+      "name": "Admin/",
+      "description": "admin's endpoints"
+    },
+    {
+      "name": "Admin/Activity",
+      "description": "Managing activities (add,delete,edit....)"
+    },
+    {
+      "name": "Admin/Clubs",
+      "description": "Managing clubs (add,delete,edit....)"
+    },
+    {
+      "name": "Admin/Rooms",
+      "description": "Manage rooms"
     }
   ],
   "schemes": [
@@ -58,7 +74,7 @@
     "/auth/register": {
       "post": {
         "tags": [
-          "auth/"
+          "Auth/"
         ],
         "description": "",
         "parameters": [
@@ -106,7 +122,7 @@
     "/auth/login": {
       "post": {
         "tags": [
-          "auth/"
+          "Auth/"
         ],
         "description": "",
         "parameters": [
@@ -142,7 +158,7 @@
     "/auth/logout": {
       "get": {
         "tags": [
-          "auth/"
+          "Auth/"
         ],
         "description": "",
         "parameters": [
@@ -168,12 +184,12 @@
     "/admin/": {
       "get": {
         "tags": [
-          "admin/"
+          "Admin/"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "cookie",
+            "name": "x-api-key",
             "in": "header",
             "type": "string"
           }
@@ -194,7 +210,7 @@
     "/admin/getAllUsers/{limit}": {
       "get": {
         "tags": [
-          "admin/"
+          "Admin/"
         ],
         "description": "",
         "parameters": [
@@ -202,6 +218,11 @@
             "name": "limit",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
             "type": "string"
           }
         ],
@@ -211,6 +232,12 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -218,17 +245,20 @@
     "/admin/getDashboard": {
       "get": {
         "tags": [
-          "admin/"
+          "Admin/"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "cookie",
+            "name": "x-api-key",
             "in": "header",
             "type": "string"
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Unauthorized"
           },
@@ -241,7 +271,7 @@
     "/admin/activity/add": {
       "post": {
         "tags": [
-          "admin/activity"
+          "Admin/Activity"
         ],
         "description": "",
         "parameters": [
@@ -294,7 +324,7 @@
     "/admin/activity/edit/{id}": {
       "post": {
         "tags": [
-          "admin/activity"
+          "Admin/Activity"
         ],
         "description": "",
         "parameters": [
@@ -356,7 +386,7 @@
     "/admin/activity/delete/{id}": {
       "get": {
         "tags": [
-          "admin/activity"
+          "Admin/Activity"
         ],
         "description": "",
         "parameters": [
@@ -391,7 +421,7 @@
     "/admin/clubs/addClub": {
       "post": {
         "tags": [
-          "admin/clubs"
+          "Admin/Clubs"
         ],
         "description": "",
         "parameters": [
@@ -447,7 +477,7 @@
     "/admin/clubs/editClub": {
       "post": {
         "tags": [
-          "admin/clubs"
+          "Admin/Clubs"
         ],
         "description": "",
         "parameters": [
@@ -503,7 +533,7 @@
     "/admin/clubs/deleteClub/{id}": {
       "get": {
         "tags": [
-          "admin/clubs"
+          "Admin/Clubs"
         ],
         "description": "",
         "parameters": [
@@ -538,7 +568,7 @@
     "/admin/clubs/getClubById/{id}": {
       "get": {
         "tags": [
-          "admin/clubs"
+          "Admin/Clubs"
         ],
         "description": "",
         "parameters": [
@@ -567,7 +597,7 @@
     "/admin/clubs/getAllCubs/{limit}": {
       "get": {
         "tags": [
-          "admin/clubs"
+          "Admin/Clubs"
         ],
         "description": "",
         "parameters": [
@@ -602,7 +632,7 @@
     "/admin/rooms/getAllRoom/{limit}": {
       "get": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -626,7 +656,7 @@
     "/admin/rooms/getRoom/{id}": {
       "get": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -650,7 +680,7 @@
     "/admin/rooms/getRoomsClub/{id}": {
       "get": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -674,12 +704,12 @@
     "/admin/rooms/add": {
       "post": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "cookie",
+            "name": "x-api-key",
             "in": "header",
             "type": "string"
           },
@@ -721,7 +751,7 @@
     "/admin/rooms/edit/{id}": {
       "post": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -732,7 +762,7 @@
             "type": "string"
           },
           {
-            "name": "cookie",
+            "name": "x-api-key",
             "in": "header",
             "type": "string"
           },
@@ -771,10 +801,10 @@
         }
       }
     },
-    "/admin/rooms/updateInventory/{id}": {
-      "post": {
+    "/admin/rooms/increment/{id}": {
+      "get": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -782,6 +812,125 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/rooms/decrement/{id}": {
+      "get": {
+        "tags": [
+          "Admin/Rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/rooms/reset/{id}": {
+      "get": {
+        "tags": [
+          "Admin/Rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/admin/rooms/getInventory/{id}": {
+      "get": {
+        "tags": [
+          "Admin/Rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/admin/rooms/getNbInventory/{id}": {
+      "get": {
+        "tags": [
+          "Admin/Rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/admin/rooms/updateInventory/{id}": {
+      "post": {
+        "tags": [
+          "Admin/Rooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
             "type": "string"
           },
           {
@@ -804,6 +953,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -813,7 +965,7 @@
     "/user/editSelfUser": {
       "post": {
         "tags": [
-          "users/"
+          "Users/"
         ],
         "description": "",
         "parameters": [
@@ -858,7 +1010,7 @@
     "/user/getLog/{id}": {
       "get": {
         "tags": [
-          "users/"
+          "Users/"
         ],
         "description": "",
         "parameters": [
@@ -882,7 +1034,7 @@
     "/user/addLog/{id}": {
       "post": {
         "tags": [
-          "users/"
+          "Users/"
         ],
         "description": "",
         "parameters": [
@@ -903,7 +1055,7 @@
     "/user/getUser/{id}": {
       "get": {
         "tags": [
-          "users/"
+          "Users/"
         ],
         "description": "",
         "parameters": [
@@ -927,7 +1079,7 @@
     "/user/addUserActivity/{id1}/{id2}": {
       "get": {
         "tags": [
-          "users/"
+          "Users/"
         ],
         "description": "",
         "parameters": [

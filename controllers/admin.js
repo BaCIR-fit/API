@@ -7,8 +7,6 @@ import activities from "../models/Activity.js";
 
 
 export async function getDashboard(req,res){
-    
-
     let allClubs = await clubs.find({});
     let allRooms = await rooms.find({});
     let allActivities = await activities.find({})
@@ -36,7 +34,12 @@ export async function getDashboard(req,res){
         "stats":[],
         "clubs":allClubs, // ajouter les rooms dans le tableau
     }
-    
+
+    return res.status(200).json({
+        status: "ok",
+        data:dashboard_data,
+    })
+
     //STATS
     // stats daily/monthly/yearly
     

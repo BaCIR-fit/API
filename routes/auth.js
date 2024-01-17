@@ -42,7 +42,7 @@ authRouter.post(
         .withMessage("Doit être de 8 charactères minimum"),
     Validate,
     Register,
-    // #swagger.tags = ['auth/']
+    // #swagger.tags = ['Auth/']
 
 );
 
@@ -55,12 +55,12 @@ authRouter.post(
     check("password").not().isEmpty(),
     Validate,
     Login,
-    // #swagger.tags = ['auth/']
+    // #swagger.tags = ['Auth/']
 
 );
 
 
-authRouter.get("/logout", Logout,// #swagger.tags = ['auth/']
+authRouter.get("/logout", Logout,// #swagger.tags = ['Auth/']
 );
 
 export default authRouter;

@@ -8,27 +8,27 @@ const clubRouter = express.Router();
 
 // Create club == POST request
 clubRouter.post("/addClub",Verify,VerifyRole,addClub
-// #swagger.tags = ['admin/clubs']
+// #swagger.tags = ['Admin/Clubs']
 );
 
 
 // Edit club == POST request
-clubRouter.post("/editClub",Verify,VerifyRole,editClub// #swagger.tags = ['admin/clubs']
+clubRouter.post("/editClub",Verify,VerifyRole,editClub// #swagger.tags = ['Admin/Clubs']
 )
 
 
 // Delete club == GET request
-clubRouter.get("/deleteClub/:id",Verify,VerifyRole,deleteClub // #swagger.tags = ['admin/clubs']
+clubRouter.get("/deleteClub/:id",Verify,VerifyRole,deleteClub // #swagger.tags = ['Admin/Clubs']
 )
 
 
 // Get club by id == GET request
-clubRouter.get("/getClubById/:id",Verify,VerifyRole,getClubById// #swagger.tags = ['admin/clubs']
+clubRouter.get("/getClubById/:id",Verify,VerifyRole,getClubById// #swagger.tags = ['Admin/Clubs']
 )
 
 
 // Get all clubs == GET request
-clubRouter.get("/getAllCubs/:limit",Verify,VerifyRole,getAllClubs// #swagger.tags = ['admin/clubs']
+clubRouter.get("/getAllCubs/:limit",Verify,VerifyRole,getAllClubs// #swagger.tags = ['Admin/Clubs']
 )
 
 export default clubRouter;

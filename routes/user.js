@@ -40,14 +40,14 @@ userRouter.post(
         .escape(),
     Validate,
     Edit
-    //#swagger.tags = ['users/']
+    //#swagger.tags = ['Users/']
 )
 
 // Get log route == GET request
 userRouter.get(
     "/getLog/:id",
     getLog
-    //#swagger.tags = ['users/']
+    //#swagger.tags = ['Users/']
 )
 
 // update log route == POST request
@@ -76,7 +76,7 @@ userRouter.post(
         .trim()
         .escape(),
     addLog
-    //#swagger.tags = ['users/']
+    //#swagger.tags = ['Users/']
 )
 
 
@@ -85,13 +85,13 @@ userRouter.post(
 userRouter.get(
     "/getUser/:id",
     getUser
-    //#swagger.tags = ['users/']
+    //#swagger.tags = ['Users/']
 )
 
 userRouter.get(
     "/addUserActivity/:id1/:id2",
     addUserActivity
-    //#swagger.tags = ['users/']
+    //#swagger.tags = ['Users/']
 )
 
 
