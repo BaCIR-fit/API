@@ -46,7 +46,6 @@ export async function Verify(req, res, next) {
 
 export function VerifyAdmin(req, res, next) {
     try {
-        // console.log(req.)
         // check if user has no advance privileges
         // return an unathorized response
         const authHeader = req.header("x-api-key"); // get the session cookie from request header
@@ -64,7 +63,6 @@ export function VerifyAdmin(req, res, next) {
         res.status(500).json({
             status: "error",
             code: 500,
-            data: [],
             message: "Internal Server Error : "+err,
         });
     }

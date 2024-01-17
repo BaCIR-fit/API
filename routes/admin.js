@@ -44,16 +44,13 @@ adminApp.get("/getAllUsers/:limit",VerifyAdmin,async function(req,res){
         console.log(err)
         return res.status(400).json({
             status: "failed",
-            message: "Erreur lors de la récupération des users " 
-            + err,
+            message: "Erreur lors de la récupération des users " + err,
         })
     })
     //#swagger.tags = ['admin/']
 });
 
-adminApp.get("/getDashboard"
-    ,VerifyAdmin
-    ,getDashboard);
+adminApp.get("/getDashboard" ,VerifyAdmin ,getDashboard);
 
 // manage activities
 

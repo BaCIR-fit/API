@@ -2,7 +2,7 @@ import express from "express";
 import Validate from "../middleware/validate.js";
 import { getAllRoom, getRoom, getRoomsClub, addRoom, deleteRoom, editRoom, incrementRoom,
          decrementRoom, resetRoom, getInventory,updateInventory, getNbInventory } from "../controllers/room.js";
-import { Verify,VerifyRole } from "../middleware/verify.js";
+import { Verify,VerifyAdmin,VerifyRole } from "../middleware/verify.js";
 import { check } from "express-validator";
 const roomRouter = express.Router();
 
@@ -33,7 +33,7 @@ roomRouter.get(
 
 // create room == POST request
 roomRouter.post(
-    "/add", Verify, VerifyRole,
+    "/add", VerifyAdmin,
     check("club_id")
         .not()
         .isEmpty()
@@ -61,7 +61,7 @@ roomRouter.post(
 
 // edit room == POST request
 roomRouter.post(
-    "/edit/:id", Verify, VerifyRole,
+    "/edit/:id", VerifyAdmin,
     check("room_name")
         .not()
         .isEmpty()
@@ -99,50 +99,52 @@ roomRouter.get(
 
 // increment capacity == GET request
 roomRouter.get(
-    // #swagger.tags = ['admin/rooms']
     "/increment/:id",
     Validate,
     incrementRoom
+    // #swagger.tags = ['admin/rooms']
+
 )
 
 
 // decrement capacity == GET request
 roomRouter.get(
-    // #swagger.tags = ['admin/rooms']
     "/decrement/:id",
     Validate,
     decrementRoom
+    // #swagger.tags = ['admin/rooms']
+
 )
 
 // reset capacity == GET request
 roomRouter.get(
-    // #swagger.tags = ['admin/rooms']
     "/reset/:id",
     Validate,
     resetRoom
+    // #swagger.tags = ['admin/rooms']
 )
 
 // INVENTORY
-
 // get inventaire by room id == GET request
 roomRouter.get(
-    // #swagger.tags = ['admin/rooms']
     "/getInventory/:id",
     Validate,
     getInventory
+    // #swagger.tags = ['admin/rooms']
 )
 
 // get number of equipement from inventary id and equipment id == GET request
 roomRouter.get(
-    // #swagger.tags = ['admin/rooms']
     "/getNbInventory/:id",
     Validate,
     getNbInventory
+    // #swagger.tags = ['admin/rooms']
+
 )
 
 // update inventary by room id == POST request
 roomRouter.post(
-    "/updateInventory/:id", //Verify, VerifyRole,
+    "/updateInventory/:id",VerifyAdmin,
     check("inventory")
         .not()
         .isEmpty()

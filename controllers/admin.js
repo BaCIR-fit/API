@@ -7,8 +7,6 @@ import activities from "../models/Activity.js";
 
 
 export async function getDashboard(req,res){
-    
-
     let allClubs = await clubs.find({});
     let allRooms = await rooms.find({});
     let allActivities = await activities.find({})
