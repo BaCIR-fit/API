@@ -110,3 +110,31 @@ export async function DeleteActivity(req, res) {
         });
     }
 }
+
+/**
+ * @route GET /activity/increment/:id
+ * @desc increment participant of activity
+ * @access Admin
+ */
+export async function incrementActivity(req, res) {
+    try{
+        let data = await activities.findOne({_id: id})
+        activities.updateOne({_id:data._id},{participant_signin: data.participant_signin + 1}).then(activity => {
+            return activity
+        }).catch((err) => { return err });   
+    } catch (err) { return err }
+}
+
+/**
+ * @route GET /activity/decrement/:id
+ * @desc decrement participant of activity
+ * @access Admin
+ */
+export async function decrementActivity(req, res) {
+    try{
+        let data = await activities.findOne({_id: id})
+        activities.updateOne({_id:data._id},{participant_signin: data.participant_signin - 1}).then(activity => {
+            return activity
+        }).catch((err) => { return err });   
+    } catch (err) { return err }
+}

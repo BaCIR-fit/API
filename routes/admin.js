@@ -1,5 +1,5 @@
 import express from "express";
-import { Verify,VerifyRole } from "../middleware/verify.js";
+import { Verify,VerifyAdmin,VerifyRole } from "../middleware/verify.js";
 import users from "../models/User.js";
 import activityRoute from "./activity.js";
 import clubRouter from "./club.js";
@@ -51,8 +51,8 @@ adminApp.get("/getAllUsers/:limit",async function(req,res){
     //#swagger.tags = ['admin/']
 });
 
-adminApp.get("/getDashboard",Verify
-    // ,VerifyRole
+adminApp.get("/getDashboard"
+    ,VerifyAdmin
     ,getDashboard);
 
 // manage activities

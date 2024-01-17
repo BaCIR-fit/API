@@ -29,6 +29,11 @@ const ClubsSchema = new mongoose.Schema(
             required: true,
             default: "0",
         },
+        rooms: {
+            type: Array,
+            required: true,
+            default: [],
+        },
     },
     { 
         timestamps: true 

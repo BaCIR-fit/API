@@ -1,29 +1,42 @@
 import clubs from "../models/Clubs.js";
 import rooms from "../models/Room.js";
 import users from "../models/User.js";
+import activities from "../models/Activity.js";
 
 // import { getAllClubs } from "./clubs.js";
 
 
 export async function getDashboard(req,res){
-    let dashboard_data = {
-        "stats":[],
-        "clubs":[], // ajouter les rooms dans le tableau
-        "activities":[]
-    }
+    
 
     let allClubs = await clubs.find({});
-    let tmp_clubs = []
-    
-    allClubs.forEach(club => {
-        // let tmp = club
-        rooms.find({_id:club._id}).then((rms) => {
-            let tmp = club._doc
-            tmp_clubs.push({...tmp, "rooms":rms})
-            console.log(tmp_clubs)
-        })
-        
+    let allRooms = await rooms.find({});
+    let allActivities = await activities.find({})
+    // link les activités aux rooms
+    let tmpRooms = allRooms;
+    allRooms = tmpRooms.map(function(x) { 
+        let a = allActivities.filter((el) => el.room_id == x._id)
+        console.log("act: "+a+" fin act")
+        x.activities = a
+        return x
     })
+
+    // link les rooms aux clubs
+    let tmpClubs = allClubs;
+    allClubs = tmpClubs.map(function(x) { 
+        let r = allRooms.filter((el) => el.club_id == x._id)
+        console.log("rooms: "+r+" fin rooms")
+        x.rooms = r
+        return x
+    })
+    
+    console.log(allClubs)
+
+    let dashboard_data = {
+        "stats":[],
+        "clubs":allClubs, // ajouter les rooms dans le tableau
+    }
+    
     //STATS
     // stats daily/monthly/yearly
     

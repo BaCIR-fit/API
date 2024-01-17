@@ -1,12 +1,14 @@
 import users from '../models/User.js';
-import history from '../models/Historique.js';
+import { incrementRoom } from "../controllers/room.js";
+import { incrementActivity } from "../controllers/activity.js"
+import activities from "../models/Activity.js";
 
 /**
- * @route POST v1/user/getHistory/:id/
+ * @route GET v1/user/getLog/:id/
  * @desc Get history of user
  * @access Public
  */
-export async function getHistory(req, res){
+export async function getLog(req, res){
     users.findOne({_id: req.params.id})
     .then(user => {
         return res.status(200).json({
@@ -24,39 +26,81 @@ export async function getHistory(req, res){
 
 
 /**
- * @route POST v1/user/createHistory/:id/
+ * @route POST v1/user/addLog/:id/
  * @desc create history of user
  * @access Public
  */
-export async function createHistory(req, res){
+export async function addLog(req, res){
     // get required variables from request body, using es6 object destructing
     const {workout_date, workout_time, workout_duration, localisation} = req.body;
-    try {
-        // create an instance of history model
-        const newLog = new history({
-            workout_date,
-            workout_time,
-            workout_duration,
-            localisation,
-            id_user: req.params.id
-        });
-        const savedLog = await newLog.save(); // save new room into the database
-        const { role, ...Log_data } = savedLog._doc;
-        res.status(200).json({
+
+    users.findOne({_id: req.params.id})
+    .then(user => {
+        let newLog = {
+            "workout_date": workout_date,
+            "workout_time" : workout_time,
+            "workout_duration": workout_duration,
+            "localisation": localisation,
+        }
+        user.logs.push(newLog)
+        return res.status(200).json({
             status: "success",
-            data: [Log_data],
-            message:
-                "L'historique a été créé avec succès.",
+            message: "Get ok "
         });
-    } catch (err) {
-        res.status(500).json({
-            status: "error",
-            code: 500,  
-            data: [],
-            message: "Internal Server Error : "+ err,
+    }).catch((err) => {
+        return res.status(400).json({
+            status: "failed",
+            message: "Erreur lors de la récupération des informations pour l'utilisateur: " + err,
         });
-    }
-    res.end();
+    });
 }
 
+/**
+ * @route GET v1/user/getUser/:id/
+ * @desc get informations about user
+ * @access Public
+ */
+export async function getUser(req, res){
+    users.findOne({_id: req.params.id})
+    .then(user => {
+        return res.status(200).json({
+            status: "success",
+            data: [user],
+            message: "Get ok "
+        });
+    }).catch((err) => {
+        return res.status(400).json({
+            status: "failed",
+            message: "Erreur lors de la récupération des informations de l'utilisateur: " + err,
+        });
+    });
+}
+
+
+/**
+ * @route POST v1/user/addUserActivity/:id1/:id2/
+ * @desc get informations about user
+ * @access Public
+ */
+export async function addUserActivity(req, res){
+    users.findOne({_id: req.params.id1})
+    .then(user => {
+
+        activities.findOne({_id: req.params.id2})
+        .then(activity => {
+
+        })
+        incrementRoom(user.id);
+        incrementActivity(user.id);
+        return res.status(200).json({
+            status: "success",
+            message: "Get ok "
+        });
+    }).catch((err) => {
+        return res.status(400).json({
+            status: "failed",
+            message: "Erreur lors de l'ajout de l'utilisateur: " + err,
+        });
+    });
+}
 

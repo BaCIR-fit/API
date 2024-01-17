@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
 const ActivitySchema = new mongoose.Schema(
-    {
+    {   
+        room_id:{
+            type: String,
+            required: "room_id is required",
+        },
         activity_name: {
             type: String,
             required: "Your activity_name is required",

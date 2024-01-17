@@ -168,77 +168,24 @@ export async function deleteRoom(req, res){
 }
 
 
-/**
- * @route POST v1/room/increment/:id
- * @desc Increment capacity by id
- * @access Admin
- */
-export async function incrementRoom(req, res){
+
+export async function incrementRoom(id){
     try{
-        // modifie les informations de l'activité, sauf le mot de passe
-        let data = await room.findOne({_id: req.params.id})
-        room.updateOne({_id:data._id},{actual_capacity: data.actual_capacity+1}).then(rooms => {
-            return res.status(200).json({
-                status: "success",
-                data: [rooms],
-                message: "Increment ok "
-            });
-        }).catch((err) => {
-            return res.status(400).json({
-                status: "failed",
-                data: ["error "],
-                message: "Erreur lors de la récupération des informations: " + err,
-            });
-        });   
-    }
-    catch (err) {
-        return res.status(400).json({
-            status: "failed",
-            data: ["error "],
-            message: "Erreur lors de la récupération des informations: " + err,
-        });
-    }
+        let data = await room.findOne({_id: id})
+        room.updateOne({_id:data._id},{actual_capacity: data.actual_capacity + 1}).then(rooms => {
+            return rooms
+        }).catch((err) => { return err });   
+    } catch (err) { return err }
 }
 
 
-/**
- * @route POST v1/room/decrement/:id
- * @desc Decrement capacity by id
- * @access Admin
- */
 export async function decrementRoom(req, res){
     try{
-        // modifie les informations de l'activité, sauf le mot de passe
-        let data = await room.findOne({_id: req.params.id})
-        if (data.actual_capacity == 0){
-            return res.status(400).json({
-                status: "failed",
-                data: [],
-                message: "La capacité est de 0. Elle ne peut pas être décrémentée.",
-            });
-        }
-        
-        room.updateOne({_id:data._id},{actual_capacity: data.actual_capacity-1}).then(rooms => {
-            return res.status(200).json({
-                status: "success",
-                data: [rooms],
-                message: "Decrement ok "
-            });
-        }).catch((err) => {
-            return res.status(400).json({
-                status: "failed",
-                data: ["error "],
-                message: "Erreur lors de la récupération des informations: " + err,
-            });
-        });   
-    }
-    catch (err) {
-        return res.status(400).json({
-            status: "failed",
-            data: ["error "],
-            message: "Erreur lors de la récupération des informations: " + err,
-        });
-    }
+        let data = await room.findOne({_id: id})
+        room.updateOne({_id:data._id},{actual_capacity: data.actual_capacity - 1}).then(rooms => {
+            return rooms
+        }).catch((err) => { return err });   
+    } catch (err) { return err }
 }
 
 

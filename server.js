@@ -51,6 +51,9 @@ mongoose.connect(URI)
 server.use(app);
 
 // === 5 - START UP SERVER ===
-server.listen(PORT, () =>
-    console.log(`Server running on http://localhost:${PORT}`)
+// let host = "10.224.1.119"
+let host = "localhost"
+server.listen(PORT,host, () =>
+    console.log(`Server running on http://${host}:${PORT}`)
+
 );

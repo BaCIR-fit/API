@@ -1,7 +1,7 @@
 import users from "../models/User.js";
 import Blacklist from "../models/Blacklist.js";
 import jwt from "jsonwebtoken";
-import {SECRET_ACCESS_TOKEN} from "../config/index.js"
+import {SECRET_ACCESS_TOKEN, API_KEY} from "../config/index.js"
 
 export async function Verify(req, res, next) {
     try {
@@ -43,13 +43,43 @@ export async function Verify(req, res, next) {
         });
     }
 }
-export function VerifyRole(req, res, next) {
+
+export function VerifyAdmin(req, res, next) {
     try {
-        const user = req.user; // we have access to the user object from the request
-        const { role } = user; // extract the user role
+        // console.log(req.)
         // check if user has no advance privileges
         // return an unathorized response
-        if (role !== "0x88") {
+        const authHeader = req.headers["cookie"]; // get the session cookie from request header
+
+        if (!authHeader) return res.sendStatus(401); // if there is no cookie from request header, send an unauthorized response.
+        const cookie = authHeader.split("=")[1]; // If there is, split the cookie string to get the actual jwt
+
+        const token = cookie.split(";")[0];
+        if (token != API_KEY ) {
+            return res.status(401).json({
+                status: "failed",
+                message: "You are not authorized to view this page.",
+            });
+        }
+        next(); // continue to the next middleware or function
+    } catch (err) {
+        res.status(500).json({
+            status: "error",
+            code: 500,
+            data: [],
+            message: "Internal Server Error : "+err,
+        });
+    }
+}
+export function VerifyRole(req, res, next) {
+    try {
+        console.log(req)
+        const user = req.user; // we have access to the user object from the request
+        // console.log("verify : "+user.isAdmin)
+        const isAdmin  = user.isAdmin; // extract the user role
+        // check if user has no advance privileges
+        // return an unathorized response
+        if (!isAdmin) {
             return res.status(401).json({
                 status: "failed",
                 message: "You are not authorized to view this page.",
