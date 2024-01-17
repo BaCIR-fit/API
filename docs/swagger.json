@@ -267,6 +267,9 @@
                 },
                 "activity_time_duration": {
                   "example": "any"
+                },
+                "room_id": {
+                  "example": "any"
                 }
               }
             }

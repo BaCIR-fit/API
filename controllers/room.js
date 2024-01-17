@@ -179,7 +179,7 @@ export async function incrementRoom(id){
 }
 
 
-export async function decrementRoom(req, res){
+export async function decrementRoom(id){
     try{
         let data = await room.findOne({_id: id})
         room.updateOne({_id:data._id},{actual_capacity: data.actual_capacity - 1}).then(rooms => {

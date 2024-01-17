@@ -33,7 +33,12 @@ activityRouter.post(
         .withMessage("La durée de l'activité est requis")
         .trim()
         .escape(),
-
+    check("room_id")
+        .not()
+        .isEmpty()
+        .withMessage("La salle est requise")
+        .trim()
+        .escape(),
     Validate,
     AddActivity
     //#swagger.tags = ['admin/activity']

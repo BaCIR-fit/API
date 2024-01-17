@@ -25,9 +25,9 @@ export async function getLog(req, res){
 }
 
 
-export async function addLog(id){
+export async function addLog(id, reqBody){
     // get required variables from request body, using es6 object destructing
-    const {workout_date, workout_time, workout_duration, localisation} = req.body;
+    const {workout_date, workout_time, workout_duration, localisation} = reqBody;
 
     users.findOne({_id: id})
     .then(user => {
@@ -43,10 +43,7 @@ export async function addLog(id){
             message: "Get ok "
         });
     }).catch((err) => {
-        return res.status(400).json({
-            status: "failed",
-            message: "Erreur lors de la récupération des informations pour l'utilisateur: " + err,
-        });
+        return err
     });
 }
 
@@ -82,7 +79,7 @@ export async function addUserActivity(req, res){
     .then(user => {
         activities.findOne({_id: req.params.id2})
         .then(activity => {
-            addLog(user._id);
+            addLog(user._id, req.body);
             incrementActivity(activity._id);
             incrementRoom(activity.room);
 
