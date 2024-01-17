@@ -73,7 +73,7 @@ export async function getUser(req, res){
 
 
 /**
- * @route POST v1/user/addUserActivity/:id1/:id2/
+ * @route get v1/user/addUserActivity/:id1/:id2/
  * @desc add activity to user and increment activity and room
  * @access Public
  */
@@ -85,7 +85,7 @@ export async function addUserActivity(req, res){
             addLog(user._id);
             incrementActivity(activity._id);
             incrementRoom(activity.room);
-            
+
             return res.status(200).json({
                 status: "success",
                 message: "Get ok "

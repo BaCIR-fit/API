@@ -2,9 +2,10 @@ import express from "express";
 import Validate from "../middleware/validate.js";
 import { check } from "express-validator";
 import { Edit } from "../controllers/auth.js";
-import { getLog, addLog, getUser } from "../controllers/user.js"
+import { getLog, addLog, getUser, addUserActivity } from "../controllers/user.js"
 
-const userRouter = express.Router();
+const userRouter = express.Router(
+);
 
 // Edit route == POST request
 userRouter.post(
@@ -46,6 +47,7 @@ userRouter.post(
 userRouter.get(
     "/getLog/:id",
     getLog
+    //#swagger.tags = ['users/']
 )
 
 // update log route == POST request
@@ -74,6 +76,7 @@ userRouter.post(
         .trim()
         .escape(),
     addLog
+    //#swagger.tags = ['users/']
 )
 
 
@@ -82,6 +85,13 @@ userRouter.post(
 userRouter.get(
     "/getUser/:id",
     getUser
+    //#swagger.tags = ['users/']
+)
+
+userRouter.get(
+    "/addUserActivity/:id1/:id2",
+    addUserActivity
+    //#swagger.tags = ['users/']
 )
 
 
