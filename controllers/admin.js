@@ -36,6 +36,13 @@ export async function getDashboard(req,res){
         "stats":[],
         "clubs":allClubs, // ajouter les rooms dans le tableau
     }
+
+    return res.status(200).json({
+        status: "failed",
+        data:dashboard_data,
+        message: "Erreur lors de la récupération des users " 
+        + err,
+    })
     
     //STATS
     // stats daily/monthly/yearly

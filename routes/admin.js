@@ -14,7 +14,7 @@ adminApp.use("/rooms",roomRouter);
 
 
 // default admin page
-adminApp.get("/",Verify,VerifyRole, (req,res) => {
+adminApp.get("/",VerifyAdmin, (req,res) => {
     try {
         res.status(200).json({
             status: "success",
@@ -31,7 +31,7 @@ adminApp.get("/",Verify,VerifyRole, (req,res) => {
 
 
 
-adminApp.get("/getAllUsers/:limit",async function(req,res){
+adminApp.get("/getAllUsers/:limit",VerifyAdmin,async function(req,res){
     // récupère tous les users
     users.find({}).limit(req.params.limit).then((data) => {
         console.log("data : ",data)
