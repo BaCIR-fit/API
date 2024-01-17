@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "REST API",
+    "title": "Basic Cir API",
     "description": "API for basic cir blabla",
     "version": "1.0.0"
   },
@@ -9,16 +9,32 @@
   "basePath": "/",
   "tags": [
     {
+      "name": "default",
+      "description": "base path"
+    },
+    {
+      "name": "Auth/",
+      "description": "Authentication relative's endpoints"
+    },
+    {
+      "name": "Users/",
+      "description": "public user endpoints"
+    },
+    {
       "name": "Admin/",
-      "description": "Queue related apis"
+      "description": "admin's endpoints"
     },
     {
       "name": "Admin/Activity",
-      "description": "Activity based endpoints"
+      "description": "Managing activities (add,delete,edit....)"
     },
     {
-      "name": "Health",
-      "description": "Health Check"
+      "name": "Admin/Clubs",
+      "description": "Managing clubs (add,delete,edit....)"
+    },
+    {
+      "name": "Admin/Rooms",
+      "description": "Manage rooms"
     }
   ],
   "schemes": [
@@ -58,7 +74,7 @@
     "/auth/register": {
       "post": {
         "tags": [
-          "auth/"
+          "Auth/"
         ],
         "description": "",
         "parameters": [
@@ -106,7 +122,7 @@
     "/auth/login": {
       "post": {
         "tags": [
-          "auth/"
+          "Auth/"
         ],
         "description": "",
         "parameters": [
@@ -142,7 +158,7 @@
     "/auth/logout": {
       "get": {
         "tags": [
-          "auth/"
+          "Auth/"
         ],
         "description": "",
         "parameters": [
@@ -402,7 +418,7 @@
     "/admin/clubs/addClub": {
       "post": {
         "tags": [
-          "admin/clubs"
+          "Admin/Clubs"
         ],
         "description": "",
         "parameters": [
@@ -458,7 +474,7 @@
     "/admin/clubs/editClub": {
       "post": {
         "tags": [
-          "admin/clubs"
+          "Admin/Clubs"
         ],
         "description": "",
         "parameters": [
@@ -514,7 +530,7 @@
     "/admin/clubs/deleteClub/{id}": {
       "get": {
         "tags": [
-          "admin/clubs"
+          "Admin/Clubs"
         ],
         "description": "",
         "parameters": [
@@ -549,7 +565,7 @@
     "/admin/clubs/getClubById/{id}": {
       "get": {
         "tags": [
-          "admin/clubs"
+          "Admin/Clubs"
         ],
         "description": "",
         "parameters": [
@@ -578,7 +594,7 @@
     "/admin/clubs/getAllCubs/{limit}": {
       "get": {
         "tags": [
-          "admin/clubs"
+          "Admin/Clubs"
         ],
         "description": "",
         "parameters": [
@@ -613,7 +629,7 @@
     "/admin/rooms/getAllRoom/{limit}": {
       "get": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -637,7 +653,7 @@
     "/admin/rooms/getRoom/{id}": {
       "get": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -661,7 +677,7 @@
     "/admin/rooms/getRoomsClub/{id}": {
       "get": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -685,7 +701,7 @@
     "/admin/rooms/add": {
       "post": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -732,7 +748,7 @@
     "/admin/rooms/edit/{id}": {
       "post": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -785,7 +801,7 @@
     "/admin/rooms/increment/{id}": {
       "get": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -806,7 +822,7 @@
     "/admin/rooms/decrement/{id}": {
       "get": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -827,7 +843,7 @@
     "/admin/rooms/reset/{id}": {
       "get": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -851,7 +867,7 @@
     "/admin/rooms/getInventory/{id}": {
       "get": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -875,7 +891,7 @@
     "/admin/rooms/getNbInventory/{id}": {
       "get": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -899,7 +915,7 @@
     "/admin/rooms/updateInventory/{id}": {
       "post": {
         "tags": [
-          "admin/rooms"
+          "Admin/Rooms"
         ],
         "description": "",
         "parameters": [
@@ -946,7 +962,7 @@
     "/user/editSelfUser": {
       "post": {
         "tags": [
-          "users/"
+          "Users/"
         ],
         "description": "",
         "parameters": [
@@ -991,7 +1007,7 @@
     "/user/getLog/{id}": {
       "get": {
         "tags": [
-          "users/"
+          "Users/"
         ],
         "description": "",
         "parameters": [
@@ -1015,7 +1031,7 @@
     "/user/addLog/{id}": {
       "post": {
         "tags": [
-          "users/"
+          "Users/"
         ],
         "description": "",
         "parameters": [
@@ -1036,7 +1052,7 @@
     "/user/getUser/{id}": {
       "get": {
         "tags": [
-          "users/"
+          "Users/"
         ],
         "description": "",
         "parameters": [
@@ -1060,7 +1076,7 @@
     "/user/addUserActivity/{id1}/{id2}": {
       "get": {
         "tags": [
-          "users/"
+          "Users/"
         ],
         "description": "",
         "parameters": [

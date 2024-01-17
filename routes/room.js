@@ -11,7 +11,7 @@ roomRouter.get(
     "/getAllRoom/:limit",
     Validate,
     getAllRoom,
-    // #swagger.tags = ['admin/rooms']
+    // #swagger.tags = ['Admin/Rooms']
 
 );
 
@@ -20,7 +20,7 @@ roomRouter.get(
     "/getRoom/:id",
     Validate,
     getRoom
-    // #swagger.tags = ['admin/rooms']
+    // #swagger.tags = ['Admin/Rooms']
 );
 
 // get all room by club id == GET request
@@ -28,7 +28,7 @@ roomRouter.get(
     "/getRoomsClub/:id",
     Validate,
     getRoomsClub
-    // #swagger.tags = ['admin/rooms']
+    // #swagger.tags = ['Admin/Rooms']
 );
 
 // create room == POST request
@@ -55,7 +55,7 @@ roomRouter.post(
 
     Validate,
     addRoom
-    // #swagger.tags = ['admin/rooms']
+    // #swagger.tags = ['Admin/Rooms']
 )
 
 
@@ -82,13 +82,13 @@ roomRouter.post(
         .escape(),
     Validate,
     editRoom
-    // #swagger.tags = ['admin/rooms']
+    // #swagger.tags = ['Admin/Rooms']
 )
 
 
 // delete room == GET request
 roomRouter.get(
-    // #swagger.tags = ['admin/rooms']
+    // #swagger.tags = ['Admin/Rooms']
     "/deleteRoom/:id",
     Validate,
     deleteRoom
@@ -102,7 +102,7 @@ roomRouter.get(
     "/increment/:id",
     Validate,
     incrementRoom
-    // #swagger.tags = ['admin/rooms']
+    // #swagger.tags = ['Admin/Rooms']
 
 )
 
@@ -112,7 +112,7 @@ roomRouter.get(
     "/decrement/:id",
     Validate,
     decrementRoom
-    // #swagger.tags = ['admin/rooms']
+    // #swagger.tags = ['Admin/Rooms']
 
 )
 
@@ -121,7 +121,7 @@ roomRouter.get(
     "/reset/:id",
     Validate,
     resetRoom
-    // #swagger.tags = ['admin/rooms']
+    // #swagger.tags = ['Admin/Rooms']
 )
 
 // INVENTORY
@@ -130,7 +130,7 @@ roomRouter.get(
     "/getInventory/:id",
     Validate,
     getInventory
-    // #swagger.tags = ['admin/rooms']
+    // #swagger.tags = ['Admin/Rooms']
 )
 
 // get number of equipement from inventary id and equipment id == GET request
@@ -138,7 +138,7 @@ roomRouter.get(
     "/getNbInventory/:id",
     Validate,
     getNbInventory
-    // #swagger.tags = ['admin/rooms']
+    // #swagger.tags = ['Admin/Rooms']
 
 )
 
@@ -153,7 +153,7 @@ roomRouter.post(
         .escape(),
     Validate,
     updateInventory,
-    // #swagger.tags = ['admin/rooms']
+    // #swagger.tags = ['Admin/Rooms']
 )
 
 
