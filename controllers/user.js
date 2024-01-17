@@ -25,16 +25,11 @@ export async function getLog(req, res){
 }
 
 
-/**
- * @route POST v1/user/addLog/:id/
- * @desc create history of user
- * @access Public
- */
-export async function addLog(req, res){
+export async function addLog(id){
     // get required variables from request body, using es6 object destructing
     const {workout_date, workout_time, workout_duration, localisation} = req.body;
 
-    users.findOne({_id: req.params.id})
+    users.findOne({_id: id})
     .then(user => {
         let newLog = {
             "workout_date": workout_date,
@@ -79,27 +74,32 @@ export async function getUser(req, res){
 
 /**
  * @route POST v1/user/addUserActivity/:id1/:id2/
- * @desc get informations about user
+ * @desc add activity to user and increment activity and room
  * @access Public
  */
 export async function addUserActivity(req, res){
     users.findOne({_id: req.params.id1})
     .then(user => {
-
         activities.findOne({_id: req.params.id2})
         .then(activity => {
-
-        })
-        incrementRoom(user.id);
-        incrementActivity(user.id);
-        return res.status(200).json({
-            status: "success",
-            message: "Get ok "
+            addLog(user._id);
+            incrementActivity(activity._id);
+            incrementRoom(activity.room);
+            
+            return res.status(200).json({
+                status: "success",
+                message: "Get ok "
+            });
+        }).catch((err) => {
+            return res.status(400).json({
+                status: "failed",
+                message: "Erreur lors de la récupération des informations de l'activité: " + err,
+            });
         });
     }).catch((err) => {
         return res.status(400).json({
             status: "failed",
-            message: "Erreur lors de l'ajout de l'utilisateur: " + err,
+            message: "Erreur lors de la récupération des informations de l'utilisateur: " + err,
         });
     });
 }
