@@ -40,10 +40,8 @@ export async function getDashboard(req,res){
     return res.status(200).json({
         status: "failed",
         data:dashboard_data,
-        message: "Erreur lors de la récupération des users " 
-        + err,
     })
-    
+
     //STATS
     // stats daily/monthly/yearly
     
