@@ -2,13 +2,12 @@ import express from "express";
 import { check } from "express-validator";
 import Validate  from "../middleware/validate.js";
 import { AddActivity, EditActivity, DeleteActivity } from "../controllers/activity.js";
-import { Verify,VerifyRole } from "../middleware/verify.js";
+import { Verify,VerifyRole,VerifyAdmin } from "../middleware/verify.js";
 
 const activityRouter = express.Router();
 
 // add activity route -- POST request
-activityRouter.post(
-    "/add",Verify,VerifyRole,
+activityRouter.post("/add",VerifyAdmin,
     check("activity_name")
         .not()
         .isEmpty()
@@ -47,7 +46,7 @@ activityRouter.post(
 
 // Edit route == POST request
 activityRouter.post(
-        "/edit/:id",Verify,VerifyRole,
+        "/edit/:id",VerifyAdmin,
         check("activity_name")
         .not()
         .isEmpty()
@@ -92,7 +91,7 @@ activityRouter.post(
 
 // delete route == GET request
 activityRouter.get(
-    "/delete/:id",Verify,VerifyRole,
+    "/delete/:id",VerifyAdmin,
     Validate, 
     DeleteActivity
      //#swagger.tags = ['Admin/Activity']

@@ -2,7 +2,7 @@ import express from "express";
 import { Register,Login } from "../controllers/auth.js";
 import Validate from "../middleware/validate.js";
 import { check } from "express-validator";
-import { Edit } from "../controllers/auth.js";
+import { editProfile } from "../controllers/auth.js";
 import { Logout } from "../controllers/auth.js";
 const authRouter = express.Router();
 

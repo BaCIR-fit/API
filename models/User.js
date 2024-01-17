@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema(
         logs: {
             type: Array,
             required: "Your logs are required",
-            select: false,
+            // select: false,
             default: []
         },
         isAdmin: {
