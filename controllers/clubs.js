@@ -12,8 +12,9 @@ export async function getAllClubs(req, res) {
     clubs.find({})
     .limit(limit_)
     .then(allclubs => {
+        console.log("allclubs : ",allclubs)
         return res.status(200).json({
-            data:allclubs
+            data:JSON.stringify(allclubs)
         })
     })
     .catch(err => {
