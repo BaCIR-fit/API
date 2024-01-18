@@ -72,11 +72,11 @@ userRouter.get("/isNotActive", Verify, isNotActive
     //#swagger.tags = ['Users/']
 )
 
-userRouter.get("/getActivity/:idClub", Verify, getActivity
+userRouter.get("/getActivity/:idClub", getActivity
     //#swagger.tags = ['Users/']
 )
 
-userRouter.get("/getAllActivity", Verify, getAllActivity
+userRouter.get("/getAllActivity", getAllActivity
     //#swagger.tags = ['Users/']
 )
 
