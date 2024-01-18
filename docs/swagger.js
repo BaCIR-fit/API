@@ -1,5 +1,5 @@
 import swaggerAutogen from 'swagger-autogen';
-import { HOST, PORT} from "./config/index.js"; // get the env vars from config dotenv
+import { HOST, PORT} from "../config/index.js"; // get the env vars from config dotenv
 const doc = {
   info: {
     title: 'Basic Cir API',
