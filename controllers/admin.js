@@ -56,3 +56,34 @@ export async function getDashboard(req,res){
     //#swagger.tags = ['admin/']
 
 }
+
+
+/**
+ * @route GET v1/admin/deleteUser/:id/
+ * @desc Delete user
+* @access Admin
+ */
+export async function deleteUser(req, res) {
+    try {
+        // test si l'utilisateur existe
+        const user = await users.findOne({ _id: req.params.id });
+        if (!user) {
+            return res.status(400).json({
+                status: "failed",
+                message: "User not found",
+            });
+        }
+        await users.deleteOne({ _id: req.params.id });
+
+        return res.status(200).json({
+            status: "success",
+            message: 'User deleted successfully',
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(400).json({
+            status: "failed",
+            message: 'Failed to delete user',
+        });
+    }
+}
