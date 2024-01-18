@@ -51,8 +51,7 @@ roomRouter.post(
         .isEmpty()
         .withMessage("La capacité maximum est requis")
         .trim()
-        .escape(),
-
+        .escape(),VerifyAdmin,
     Validate,
     addRoom
     // #swagger.tags = ['Admin/Rooms']
@@ -97,7 +96,7 @@ roomRouter.get(
 
 // reset capacity == GET request
 roomRouter.get(
-    "/reset/:id",
+    "/reset/:id",VerifyAdmin,
     Validate,
     resetRoom
     // #swagger.tags = ['Admin/Rooms']
@@ -106,7 +105,7 @@ roomRouter.get(
 // INVENTORY
 // get inventaire by room id == GET request
 roomRouter.get(
-    "/getInventory/:id",
+    "/getInventory/:id",VerifyAdmin,
     Validate,
     getInventory
     // #swagger.tags = ['Admin/Rooms']
@@ -114,7 +113,7 @@ roomRouter.get(
 
 // get number of equipement from inventary id and equipment id == GET request
 roomRouter.get(
-    "/getNbInventory/:id",
+    "/getNbInventory/:id",VerifyAdmin,
     Validate,
     getNbInventory
     // #swagger.tags = ['Admin/Rooms']
