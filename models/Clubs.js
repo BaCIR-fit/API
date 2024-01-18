@@ -34,6 +34,16 @@ const ClubsSchema = new mongoose.Schema(
             required: true,
             default: [],
         },
+        cap_actu: {
+            type: Number,
+            required: true,
+            default: "0",
+        },
+        cap_max: {
+            type: Number,
+            required: true,
+            default: "0",
+        },
     },
     { 
         timestamps: true 

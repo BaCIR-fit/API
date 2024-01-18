@@ -13,7 +13,7 @@ export async function getAllClubs(req, res) {
     .limit(limit_)
     .then(allclubs => {
         return res.status(200).json({
-            data:[allclubs]
+            data:allclubs
         })
     })
     .catch(err => {
@@ -76,7 +76,7 @@ export async function deleteClub(req, res){
  */
 export async function addClub(req, res) {
     // get required variables from request body, using es6 object destructing
-    const {club_name, club_manager,adress,longitude,latitude, room_number} = req.body;
+    const {club_name, club_manager,adress,longitude,latitude, room_number, cap_max} = req.body;
         // Check if activity already exists
         clubs.findOne({ club_name:club_name}).then(clubFound => {
             if(clubFound) {
@@ -91,7 +91,8 @@ export async function addClub(req, res) {
                 adress,
                 longitude,
                 latitude,
-                room_number
+                room_number,
+                cap_max
             })
             newClub.save().then(savedClub => {
                 return res.status(200).json({

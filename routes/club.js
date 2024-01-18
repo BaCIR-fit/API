@@ -28,7 +28,7 @@ clubRouter.get("/getClubById/:id",Verify,VerifyRole,getClubById// #swagger.tags 
 
 
 // Get all clubs == GET request
-clubRouter.get("/getAllCubs/:limit",Verify,VerifyRole,getAllClubs// #swagger.tags = ['Admin/Clubs']
+clubRouter.get("/getAllCubs/:limit",getAllClubs// #swagger.tags = ['Admin/Clubs']
 )
 
 export default clubRouter;

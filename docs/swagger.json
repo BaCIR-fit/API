@@ -210,7 +210,7 @@
     "/admin/getAllUsers/{limit}": {
       "get": {
         "tags": [
-          "Admin/"
+          "Users/"
         ],
         "description": "",
         "parameters": [
@@ -452,6 +452,9 @@
                   "example": "any"
                 },
                 "room_number": {
+                  "example": "any"
+                },
+                "cap_max": {
                   "example": "any"
                 }
               }
