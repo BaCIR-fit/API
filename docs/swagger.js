@@ -1,11 +1,11 @@
 import swaggerAutogen from 'swagger-autogen';
-
+import { HOST, PORT} from "../config/index.js"; // get the env vars from config dotenv
 const doc = {
   info: {
     title: 'Basic Cir API',
     description: 'API for basic cir blabla',  // by default: ''
   },
-  host:'localhost:3000',
+  host:HOST+':'+PORT,
   basePath: '/',  // by default: '/'
   schemes: ['http'],   // by default: ['http']
   consumes: ['application/json'],  // by default: ['application/json']

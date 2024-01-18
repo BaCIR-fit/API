@@ -67,7 +67,7 @@ userRouter.post("/deleteUserActivity", Verify, deleteUserActivity
 userRouter.get("/isActive", Verify, isActive
     //#swagger.tags = ['Users/']
 )
-
+    
 userRouter.get("/isNotActive", Verify, isNotActive
     //#swagger.tags = ['Users/']
 )
