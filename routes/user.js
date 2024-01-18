@@ -2,7 +2,7 @@ import express from "express";
 import Validate from "../middleware/validate.js";
 import { check } from "express-validator";
 import { editProfile } from "../controllers/auth.js";
-import { getLogs, getProfile, addUserActivity, deleteUserActivity, isActive, isNotActive, getActivity } from "../controllers/user.js"
+import { getLogs, getProfile, addUserActivity, deleteUserActivity, isActive, isNotActive, getActivity, getAllActivity } from "../controllers/user.js"
 import { Verify } from "../middleware/verify.js";
 //import { verify } from "jsonwebtoken";
 
@@ -72,9 +72,14 @@ userRouter.get("/isNotActive", Verify, isNotActive
     //#swagger.tags = ['Users/']
 )
 
-userRouter.get("/getActivity", Verify, getActivity
+userRouter.get("/getActivity/:idClub", Verify, getActivity
     //#swagger.tags = ['Users/']
 )
+
+userRouter.get("/getAllActivity", Verify, getAllActivity
+    //#swagger.tags = ['Users/']
+)
+
 
 
 export default userRouter;

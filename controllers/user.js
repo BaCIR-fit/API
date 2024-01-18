@@ -191,3 +191,25 @@ export async function getActivity(req, res){
         });
     });
 }
+
+
+/**
+ * @route get v1/user/getAllActivity
+ * @desc get activity of club
+ * @access Public
+ */
+export async function getAllActivity(req, res){
+    activities.find()
+    .then(activities => {
+        return res.status(200).json({
+            status: "success",
+            data: [activities],
+            message: "Get ok "
+        });
+    }).catch((err) => {
+        return res.status(400).json({
+            status: "failed",
+            message: "Erreur lors de la récupération des informations de l'activité: " + err,
+        });
+    });
+}
