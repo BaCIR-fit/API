@@ -89,7 +89,7 @@ export async function Login(req, res) {
     console.log(req.body)
     try {
         // Check if user exists
-        const user = await users.findOne({ email });
+        const user = await users.findOne({ email }).select('+password').exec();
         if (!user) {
             return res.status(401).json({
                 status: "failed",
@@ -123,11 +123,10 @@ export async function Login(req, res) {
 
         let qr = new qrcode({user_id:user.id,qr_value:"yes"})
         let qrsaved = await qr.save();
-        console.log(qrsaved)
         res.cookie("SessionID", token, options); // set the token to response header, so that the client sends it back on each subsequent request
         res.status(200).json({
             status: "success",
-            data:{token:token,qr_code:qrsaved.qr_value},
+            data:{token:token,qr_code:qrsaved.qr_value,user_data:JSON.stringify(user._doc)},
             message: "You have successfully logged in.",
         });
 
