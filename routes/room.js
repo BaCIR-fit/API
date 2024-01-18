@@ -1,14 +1,14 @@
 import express from "express";
 import Validate from "../middleware/validate.js";
-import { getAllRoom, getRoom, getRoomsClub, addRoom, deleteRoom, editRoom, incrementRoom,
-         decrementRoom, resetRoom, getInventory,updateInventory, getNbInventory } from "../controllers/room.js";
+import { getAllRoom, getRoom, getRoomsClub, addRoom, deleteRoom, editRoom, 
+         resetRoom, getInventory,updateInventory, getNbInventory } from "../controllers/room.js";
 import { Verify,VerifyAdmin,VerifyRole } from "../middleware/verify.js";
 import { check } from "express-validator";
 const roomRouter = express.Router();
 
 // Get all room == GET request
 roomRouter.get(
-    "/getAllRoom/:limit",
+    "/getAllRoom/:limit", VerifyAdmin,
     Validate,
     getAllRoom,
     // #swagger.tags = ['Admin/Rooms']
@@ -17,7 +17,7 @@ roomRouter.get(
 
 // get room by id == GET request
 roomRouter.get(
-    "/getRoom/:id",
+    "/getRoom/:id", VerifyAdmin,
     Validate,
     getRoom
     // #swagger.tags = ['Admin/Rooms']
@@ -25,7 +25,7 @@ roomRouter.get(
 
 // get all room by club id == GET request
 roomRouter.get(
-    "/getRoomsClub/:id",
+    "/getRoomsClub/:id", VerifyAdmin,
     Validate,
     getRoomsClub
     // #swagger.tags = ['Admin/Rooms']
@@ -88,10 +88,10 @@ roomRouter.post(
 
 // delete room == GET request
 roomRouter.get(
-    // #swagger.tags = ['Admin/Rooms']
-    "/deleteRoom/:id",
+    "/deleteRoom/:id", VerifyAdmin,
     Validate,
     deleteRoom
+    // #swagger.tags = ['Admin/Rooms']
 )
 
 

@@ -1,5 +1,4 @@
 import room from "../models/Room.js";
-import inventory from "../models/Inventory.js";
 
 // CREATE, EDIT, DELETE, GET
 
@@ -182,6 +181,13 @@ export async function incrementRoom(id){
 export async function decrementRoom(id){
     try{
         let data = await room.findOne({_id: id})
+        // check if actual capacity is not 0
+        if(data.actual_capacity <= 0){
+            return res.status(400).json({
+                status: "failed",
+                message: "L'activité est vide"
+            });
+        }
         room.updateOne({_id:data._id},{actual_capacity: data.actual_capacity - 1}).then(rooms => {
             return rooms
         }).catch((err) => { return err });   

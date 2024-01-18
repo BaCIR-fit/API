@@ -4,12 +4,13 @@ import { check } from "express-validator";
 import { editProfile } from "../controllers/auth.js";
 import { getLogs, getProfile, addUserActivity, deleteUserActivity, isActive, isNotActive } from "../controllers/user.js"
 import { Verify } from "../middleware/verify.js";
+//import { verify } from "jsonwebtoken";
 
 const userRouter = express.Router(
 );
 
 // Edit route == POST request
-userRouter.post("/editProfile",
+userRouter.post("/editProfile", Verify,
     check("user_mail")
         .isEmail()
         .withMessage("Entrez un mail valide.")
@@ -44,7 +45,7 @@ userRouter.post("/editProfile",
 )
 
 // Get log route == GET request
-userRouter.get("/getLogs",getLogs
+userRouter.get("/getLogs", Verify, getLogs, 
     //#swagger.tags = ['Users/']
 )
 
