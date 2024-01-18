@@ -5,7 +5,7 @@
     "description": "API for basic cir blabla",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "localhost:8080",
   "basePath": "/",
   "tags": [
     {
@@ -1108,22 +1108,26 @@
       }
     },
     "/user/getProfile": {
-      "get": {
+      "post" : {
         "tags": [
           "Users/"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "cookie",
-            "in": "header",
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "401": {
             "description": "Unauthorized"
           },
