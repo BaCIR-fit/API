@@ -11,11 +11,9 @@ clubRouter.post("/addClub",Verify,VerifyRole,addClub
 // #swagger.tags = ['Admin/Clubs']
 );
 
-
 // Edit club == POST request
 clubRouter.post("/editClub",Verify,VerifyRole,editClub// #swagger.tags = ['Admin/Clubs']
 )
-
 
 // Delete club == GET request
 clubRouter.get("/deleteClub/:id",Verify,VerifyRole,deleteClub // #swagger.tags = ['Admin/Clubs']
