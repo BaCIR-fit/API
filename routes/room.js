@@ -94,27 +94,6 @@ roomRouter.get(
     deleteRoom
 )
 
-// modify activity == POST request
-
-
-// increment capacity == GET request
-roomRouter.get(
-    "/increment/:id",
-    Validate,
-    incrementRoom
-    // #swagger.tags = ['Admin/Rooms']
-
-)
-
-
-// decrement capacity == GET request
-roomRouter.get(
-    "/decrement/:id",
-    Validate,
-    decrementRoom
-    // #swagger.tags = ['Admin/Rooms']
-
-)
 
 // reset capacity == GET request
 roomRouter.get(
