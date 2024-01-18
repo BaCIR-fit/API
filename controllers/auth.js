@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import users from "../models/User.js";
 import Blacklist from '../models/Blacklist.js';
-
+import qrcode from "../models/QrCode.js";
 // REGISTER, EDIT, LOGIN & LOGOUT FUNCTIONS
 
 
@@ -98,7 +98,7 @@ export async function Login(req, res) {
             });
         }
         // if user exists, validate password
-        const isPasswordValid = bcrypt.compare(
+        const isPasswordValid = await bcrypt.compare(
             `${password}`,
             user.password
         );
@@ -117,11 +117,17 @@ export async function Login(req, res) {
             secure: true,
             sameSite: "None",
         };
+
         const token = user.generateAccessJWT(); // generate session token for user
+        let oldCodes = await qrcode.deleteMany({user_id:user.id})
+
+        let qr = new qrcode({user_id:user.id,qr_value:"yes"})
+        let qrsaved = await qr.save();
+        console.log(qrsaved)
         res.cookie("SessionID", token, options); // set the token to response header, so that the client sends it back on each subsequent request
         res.status(200).json({
             status: "success",
-            data:{token:token},
+            data:{token:token,qr_code:qrsaved.qr_value},
             message: "You have successfully logged in.",
         });
 
@@ -130,7 +136,7 @@ export async function Login(req, res) {
             status: "error",
             code: 500,
             data: [],
-            message: "Internal Server Error",
+            message: "Internal Server Error : "+err,
         });
     }
     res.end();
