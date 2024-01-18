@@ -181,6 +181,39 @@
         }
       }
     },
+    "/auth/qrVerify":{
+      "post": {
+        "tags": [
+          "Auth/"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "qrCode": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/admin/": {
       "get": {
         "tags": [
@@ -191,6 +224,7 @@
           {
             "name": "x-api-key",
             "in": "header",
+            "required": true,
             "type": "string"
           }
         ],

@@ -45,7 +45,7 @@ userRouter.post("/editProfile", Verify,
 )
 
 // Get log route == GET request
-userRouter.get("/getLogs", Verify, getLogs, 
+userRouter.post("/getLogs", Verify, getLogs, 
     //#swagger.tags = ['Users/']
 )
 

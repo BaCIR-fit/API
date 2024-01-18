@@ -52,7 +52,9 @@ server.use(app);
 
 // === 5 - START UP SERVER ===
 // let host = "10.224.1.119"
-let host = "localhost"
+
+let host = "0.0.0.0"
+// host = "localhost"
 server.listen(PORT,host, () =>
     console.log(`Server running on http://${host}:${PORT}`)
 
