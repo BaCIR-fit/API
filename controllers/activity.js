@@ -125,6 +125,13 @@ export async function incrementActivity(id) {
 export async function decrementActivity(id) {
     try{
         let data = await activities.findOne({_id: id})
+        // check if participant_signin is not 0
+        if(data.participant_signin <= 0){
+            return res.status(400).json({
+                status: "failed",
+                message: "L'activité est vide"
+            });
+        }
         activities.updateOne({_id:data._id},{participant_signin: data.participant_signin - 1}).then(activity => {
             return activity
         }).catch((err) => { return err });   
