@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import users from "../models/User.js";
 import Blacklist from '../models/Blacklist.js';
-import qrcode from "../models/QrCode.js";
+import qrcodeModel from "../models/QrCode.js";
 // REGISTER, EDIT, LOGIN & LOGOUT FUNCTIONS
 
 
@@ -173,3 +173,38 @@ export async function Logout(req, res) {
   res.end();
 }
 
+
+
+/**
+ * @route POST /auth/qrVerify
+ * @desc Verify user
+ * @access Public
+ */
+export async function QRCode(req, res) {
+    const qrCodeUser = req.body.qrCode.toString();
+
+    console.log(qrCodeUser);
+
+    try {
+        const qrCode = await qrcodeModel.findOne({ qr_value: qrCodeUser });
+
+        console.log(qrCode);
+
+        if (qrCode) {
+            const user = await users.findById(qrCode.user_id);
+            console.log(user);
+            if (user) {
+                res.status(200).json({ userId: user._id });
+            } else {
+                res.status(200).json({ userId: 0 });
+            }
+        } else {
+            res.status(200).json({ userId: 0 });
+        }
+    } catch (err) {
+        res.status(500).json({
+            status: 'error',
+            message: 'Internal Server Error',
+        });
+    }
+}

@@ -5,6 +5,7 @@
     "description": "API for basic cir blabla",
     "version": "1.0.0"
   },
+
   "host": "apibacir.fly.dev",
   "basePath": "/",
   "tags": [
@@ -181,6 +182,39 @@
         }
       }
     },
+    "/auth/qrVerify":{
+      "post": {
+        "tags": [
+          "Auth/"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "qrCode": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/admin/": {
       "get": {
         "tags": [
@@ -191,6 +225,7 @@
           {
             "name": "x-api-key",
             "in": "header",
+            "required": true,
             "type": "string"
           }
         ],
@@ -1102,22 +1137,26 @@
       }
     },
     "/user/getProfile": {
-      "get": {
+      "post" : {
         "tags": [
           "Users/"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "cookie",
-            "in": "header",
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "401": {
             "description": "Unauthorized"
           },

@@ -51,7 +51,7 @@ userRouter.get("/getLogs/:id", Verify, getLogs,
 
 // Get user infos route == GET request
 
-userRouter.get("/getProfile", Verify,getProfile
+userRouter.post("/getProfile",getProfile
     //#swagger.tags = ['Users/']
 )
 
