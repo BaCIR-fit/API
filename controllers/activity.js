@@ -7,7 +7,7 @@ import activities from "../models/Activity.js";
  */
 export async function AddActivity(req, res) {
     // get required variables from request body, using es6 object destructing
-    const { activity_name, coach_name, activity_date, activity_time_duration, room_id} = req.body;
+    const { activity_name, coach_name, activity_date, activity_time_duration, room_id, club_id} = req.body;
     try {
         // create an instance of an activity
         const newActivity = new activities({

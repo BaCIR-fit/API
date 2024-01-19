@@ -175,9 +175,31 @@ export async function isNotActive(req, res){
  * @access Public
  */
 export async function getActivity(req, res){
-    const {idClub} = req.params;
+    try {
+        const { idClub } = req.params;
+        const activities = await Activity.find({ club_id: idClub }).exec();
 
-    activities.find({club_id: idClub})
+        return res.status(200).json({
+            status: "success",
+            data: activities,
+            message: "Get ok",
+        });
+    } catch (err) {
+        return res.status(400).json({
+            status: "failed",
+            message: "Erreur lors de la récupération des informations de l'activité: " + err,
+        });
+    }
+}
+
+
+/**
+ * @route get v1/user/getAllActivity
+ * @desc get activity of club
+ * @access Public
+ */
+export async function getAllActivity(req, res){
+    activities.find()
     .then(activities => {
         return res.status(200).json({
             status: "success",
