@@ -215,12 +215,12 @@ export async function getAllActivity(req, res){
     });
 }
 /**
- * @route GET v1/user/getProfile/
+ * @route GET v1/user/getProfile/:id
  * @desc get informations about user
  * @access Public
  */
 export async function getProfile(req, res){
-    const userID = req.body.userId;
+    const userID = req.params.id;
 
     try{
         const user = await users.findById(userID);
