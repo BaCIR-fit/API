@@ -4,7 +4,9 @@ import jwt from "jsonwebtoken";
 import {SECRET_ACCESS_TOKEN, API_KEY} from "../config/index.js"
 
 export async function Verify(req, res, next) {
+    // res.set({"Access-Control-Allow-Credentials":true})
     try {
+        // console.log(req)
         const authHeader = req.headers["cookie"]; // get the session cookie from request header
 
         if (!authHeader) return res.sendStatus(401); // if there is no cookie from request header, send an unauthorized response.

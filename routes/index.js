@@ -2,10 +2,9 @@ import express from "express"; // import the express module
 import authRouter from './auth.js';
 import adminApp from "./admin.js";
 import userRouter from "./user.js";
-
+import cors from "cors";
 import { Verify } from "../middleware/verify.js";
 const app = express(); // Create an app object
-
 
 // home route with the get method and a handler
 app.get("/",Verify, (req, res) => {

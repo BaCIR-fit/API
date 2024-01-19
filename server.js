@@ -32,7 +32,18 @@ server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // CONFIGURE HEADER INFORMATION
 // Allow request from any source. In real production, this should be limited to allowed origins only
-server.use(cors());
+var allowlist = ['http://example1.com', 'http://localhost:3001']
+var corsOptionsDelegate = function (req, callback) {
+  var corsOptions;
+  if (allowlist.indexOf(req.header('Origin')) !== -1) {
+    corsOptions = { origin: true,"credentials":true} // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = { origin: false } // disable CORS for this request
+  }
+  callback(null, corsOptions) // callback expects two parameters: error and options
+}
+
+server.use(cors(corsOptionsDelegate))
 server.disable("x-powered-by"); //Reduce fingerprinting
 server.use(cookieParser());
 server.use(express.urlencoded({ extended: false }));
