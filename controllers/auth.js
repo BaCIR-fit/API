@@ -53,7 +53,7 @@ export async function Register(req, res) {
 export async function editProfile(req, res) {  
     try{
         // modifie les informations du client, sauf le mot de passe
-        let data = await users.find({ _id: req.session.passport.user})
+        let data = await users.find({ email: req.body.email})
         users.updateOne({_id:data.id},{first_name:req.body.first_name, last_name:req.body.last_name, 
         email:req.body.email, gender:req.body.gender, birth_date:req.body.birth_date}).then(user =>{
             return res.status(200).json({

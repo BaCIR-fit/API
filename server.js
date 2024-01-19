@@ -54,7 +54,7 @@ server.use(app);
 // let host = "10.224.1.119"
 
 let host = "0.0.0.0"
-// host = "localhost"
+host = "localhost"
 server.listen(PORT,host, () =>
     console.log(`Server running on http://${host}:${PORT}`)
 
