@@ -1,5 +1,5 @@
 import users from '../models/User.js';
-import { decrementRoom, incrementRoom } from "../controllers/room.js";
+import { decrementRoom, incrementRoom, updateInventory } from "../controllers/room.js";
 import { decrementActivity, incrementActivity } from "../controllers/activity.js"
 import activities from "../models/Activity.js";
 import rooms from '../models/Room.js';
@@ -139,9 +139,10 @@ export async function deleteUserActivity(req, res){
 export async function isActive(req, res){
     let user = req.user;
     user.isActive = true;
+    let updatedUser = await users.updateOne({_id:user._id},{isActive:true})
     return res.status(200).json({
         status: "success",
-        data: [user.isActive],
+        data: [updateInventory.isActive],
         message: "Get ok "
     });
 }
@@ -158,7 +159,7 @@ export async function isNotActive(req, res){
     let updatedUser = await users.updateOne({_id:user._id},{isActive:false})
     return res.status(200).json({
         status: "success",
-        data: [user.isActive],
+        data: [updatedUser.isActive],
         message: "Get ok "
     });
 }
