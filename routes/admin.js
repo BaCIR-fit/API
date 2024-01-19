@@ -4,7 +4,7 @@ import users from "../models/User.js";
 import activityRoute from "./activity.js";
 import clubRouter from "./club.js";
 import roomRouter from "./room.js";
-import { getDashboard } from "../controllers/admin.js";
+import { getDashboard, deleteUser } from "../controllers/admin.js";
 
 const adminApp = express();
 
@@ -68,4 +68,11 @@ adminApp.get("/getDashboard" ,VerifyAdmin ,getDashboard,
 // /admin/clubs/etc
 // 
 // 
+
+
+adminApp.get("/deleteUser/:id",VerifyAdmin,deleteUser,
+    //#swagger.tags = ['Admin/']
+    );
+
+    
 export default adminApp;

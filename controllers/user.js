@@ -82,11 +82,15 @@ export async function getProfile(req, res){
 export async function addUserActivity(req, res){
     
     let user = req.user;
-    const {activity_id,workout_date, workout_time, workout_duration, room_id,club_id} = req.body;
+    const {activity_id} = req.body;
     let room_name = await rooms.findOne({_id:room_id});
     let club = await Clubs.findOne({_id:club_id});
     let club_name = club.club_name;
-    let log_content = {activity_id, workout_date, workout_time, workout_duration, room_id,room_name,club_name}
+    let activity = await activities.findOne({_id:activity_id});
+    let workout_date = activity.workout_date;
+    let workout_time = activity.workout_time;
+    let workout_duration = activity.workout_duration;
+    let log_content = {activity_id, workout_date, workout_time, workout_duration, room_id, room_name, club_name}
 
     activities.findOne({_id: activity_id})
     .then(activity => {

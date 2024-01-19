@@ -1072,13 +1072,19 @@
         }
       }
     },
-    "/user/getLogs": {
+    "/user/getLogs/{id}": {
       "get": {
         "tags": [
           "Users/"
         ],
         "description": "",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "cookie",
             "in": "header",
@@ -1158,6 +1164,9 @@
                   "example": "any"
                 },
                 "room_id": {
+                  "example": "any"
+                },
+                "club_id": {
                   "example": "any"
                 }
               }
