@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import {SECRET_ACCESS_TOKEN, API_KEY} from "../config/index.js"
 
 export async function Verify(req, res, next) {
+    console.log(req);
     try {
         const authHeader = req.headers["cookie"]; // get the session cookie from request header
 
