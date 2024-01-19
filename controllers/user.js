@@ -171,11 +171,11 @@ export async function isNotActive(req, res){
 export async function getActivity(req, res){
     try {
         const idClub = req.params.idClub;
-        const Activity = await activities.findOne({ club_id: idClub });
+        const Act = await activities.findOne({ club_id: idClub });
 
         return res.status(200).json({
             status: "success",
-            data: Activity,
+            data: Act,
             message: "Get ok",
         });
     } catch (err) {
