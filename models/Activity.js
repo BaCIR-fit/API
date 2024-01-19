@@ -30,7 +30,6 @@ const ActivitySchema = new mongoose.Schema(
         activity_time_duration: {
             type: String,
             required: "Your Activity_time_duration is required",
-            select: false,
         },
         participant_max: {
             type: Number,

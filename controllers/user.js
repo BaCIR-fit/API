@@ -234,7 +234,7 @@ export async function getActivity(req, res){
  * @access Public
  */
 export async function getAllActivity(req, res){
-    activities.find()
+    activities.find({})
     .then(activities => {
         return res.status(200).json({
             status: "success",

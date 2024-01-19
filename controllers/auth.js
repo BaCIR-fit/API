@@ -55,32 +55,38 @@ export async function Register(req, res) {
 }
 
 
-export async function editProfile(req, res) {  
-    try{
+
+export async function editProfile(req, res) {
+    try {
         // modifie les informations du client, sauf le mot de passe
-        let data = await users.find({ _id: req.session.passport.user})
-        users.updateOne({_id:data.id},{first_name:req.body.first_name, last_name:req.body.last_name, 
-        email:req.body.email, gender:req.body.gender, birth_date:req.body.birth_date}).then(user =>{
+        let data = await users.find({ email: req.body.email })
+
+        console.log(data);
+        users.updateOne({ email : req.body.email }, {
+            first_name: req.body.first_name, last_name: req.body.last_name,
+            email: req.body.email, gender: req.body.gender, birth_date: req.body.birth_date
+        }).then(user => {
             return res.status(200).json({
                 status: "success",
                 data: user,
-                message: "Modif ok" 
-            }); 
-    }).catch ((err) =>{
-        return res.status(400).json({
-            status: "failed",
-            data: ["error "],
-            message: "Erreur lors de la modification des informations: " + err,
+                message: "Modif ok"
+            });
+        }).catch((err) => {
+            return res.status(400).json({
+                status: "failed",
+                data: ["error "],
+                message: "Erreur lors de la modification des informations: " + err,
+            });
         });
-    });
     } catch (err) {
         res.status(500).json({
             status: "error",
-            code: 500,  
+            code: 500,
             message: "Internal Server Error : " + err,
         });
     }
 }
+
 
 
 /**
