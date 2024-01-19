@@ -215,30 +215,33 @@ export async function getAllActivity(req, res){
     });
 }
 /**
- * @route GET v1/user/getProfile/
- * @desc get informations about user
+ * @route GET v1/user/getProfile/:userId
+ * @desc Get information about a user
  * @access Public
  */
-export async function getProfile(req, res){
-    const userID = req.body.userId;
+export async function getProfile(req, res) {
+    console.log(req.user);
+    const userID = req.user.id;
 
-    try{
+    try {
         const user = await users.findById(userID);
+
         if (user) {
-            res.status(200).json({
+            return res.status(200).json({
                 status: 'success',
-                data: [user],
-                message: 'Get ok',
+                data: user,
+                message: 'User found successfully',
             });
         } else {
-            res.status(404).json({
+            return res.status(404).json({
                 status: 'failed',
-                data: [],
+                data: null,
                 message: 'User not found',
             });
         }
     } catch (err) {
-        res.status(500).json({
+        console.error(err);
+        return res.status(500).json({
             status: 'error',
             message: 'Internal Server Error',
         });
