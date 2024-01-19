@@ -4,6 +4,7 @@ import Validate from "../middleware/validate.js";
 import { check } from "express-validator";
 import { editProfile } from "../controllers/auth.js";
 import { Logout } from "../controllers/auth.js";
+import { QRCode } from "../controllers/auth.js";
 const authRouter = express.Router();
 
 authRouter.post(
@@ -48,16 +49,24 @@ authRouter.post(
 
 authRouter.post(
     "/login",
-    check("email")
+    check("Email")
         .isEmail()
         .withMessage("Entrez un mail valide")
         .normalizeEmail(),
-    check("password").not().isEmpty(),
+    check("MotDePasse").not().isEmpty(),
     Validate,
     Login,
     // #swagger.tags = ['Auth/']
 
 );
+
+authRouter.post(
+    "/qrVerify",
+    check("qrCode").not().isEmpty(),
+    // Validate,
+    QRCode,
+    // #swagger.tags = ['Auth/']
+)
 
 
 authRouter.get("/logout", Logout,// #swagger.tags = ['Auth/']

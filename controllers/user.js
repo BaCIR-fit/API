@@ -60,21 +60,6 @@ export async function deleteLog(id, activity){
 
 
 /**
- * @route GET v1/user/getProfile/
- * @desc get informations about user
- * @access Public
- */
-export async function getProfile(req, res){
-    let user = req.user;
-    return res.status(200).json({
-        status: "success",
-        data: [user],
-        message: "Get ok "
-    });
-}
-
-
-/**
  * @route post v1/user/addUserActivity/:idActivity
  * @desc add activity to user and increment activity and room
  * @access Public
@@ -185,12 +170,12 @@ export async function isNotActive(req, res){
  */
 export async function getActivity(req, res){
     try {
-        const { idClub } = req.params;
-        const activities = await Activity.find({ club_id: idClub }).exec();
+        const idClub = req.params.idClub;
+        const Activity = await activities.findOne({ club_id: idClub });
 
         return res.status(200).json({
             status: "success",
-            data: activities,
+            data: Activity,
             message: "Get ok",
         });
     } catch (err) {
@@ -221,4 +206,34 @@ export async function getAllActivity(req, res){
             message: "Erreur lors de la récupération des informations de l'activité: " + err,
         });
     });
+}
+/**
+ * @route GET v1/user/getProfile/
+ * @desc get informations about user
+ * @access Public
+ */
+export async function getProfile(req, res){
+    const userID = req.body.userId;
+
+    try{
+        const user = await users.findById(userID);
+        if (user) {
+            res.status(200).json({
+                status: 'success',
+                data: [user],
+                message: 'Get ok',
+            });
+        } else {
+            res.status(404).json({
+                status: 'failed',
+                data: [],
+                message: 'User not found',
+            });
+        }
+    } catch (err) {
+        res.status(500).json({
+            status: 'error',
+            message: 'Internal Server Error',
+        });
+    }
 }
