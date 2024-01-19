@@ -6,8 +6,7 @@ import { getLogs, getProfile, addUserActivity, deleteUserActivity, isActive, isN
 import { Verify } from "../middleware/verify.js";
 //import { verify } from "jsonwebtoken";
 
-const userRouter = express.Router(
-);
+const userRouter = express.Router();
 
 // Edit route == POST request
 userRouter.post("/editProfile", Verify,
@@ -45,7 +44,7 @@ userRouter.post("/editProfile", Verify,
 )
 
 // Get log route == GET request
-userRouter.get("/getLogs", Verify, getLogs, 
+userRouter.get("/getLogs/:id", Verify, getLogs, 
     //#swagger.tags = ['Users/']
 )
 
