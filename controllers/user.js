@@ -142,7 +142,7 @@ export async function isActive(req, res){
     let updatedUser = await users.updateOne({_id:user._id},{isActive:true})
     return res.status(200).json({
         status: "success",
-        data: [updateInventory.isActive],
+        data: [updatedUser.isActive],
         message: "Get ok "
     });
 }
