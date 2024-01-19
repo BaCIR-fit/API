@@ -85,7 +85,9 @@ export async function editProfile(req, res) {
  */
 export async function Login(req, res) {
     // Get variables for the login process
-    const { email,password } = req.body;
+    const email = req.body.Email;
+    const password = req.body.MotDePasse
+    // const { email,password } = req.body;
     try {
         // Check if user exists
         const user = await users.findOne({ email }).select('+password').exec();

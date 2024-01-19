@@ -48,11 +48,11 @@ authRouter.post(
 
 authRouter.post(
     "/login",
-    check("email")
+    check("Email")
         .isEmail()
         .withMessage("Entrez un mail valide")
         .normalizeEmail(),
-    check("password").not().isEmpty(),
+    check("MotDePasse").not().isEmpty(),
     Validate,
     Login,
     // #swagger.tags = ['Auth/']

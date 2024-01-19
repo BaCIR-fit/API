@@ -19,7 +19,7 @@ clubRouter.get("/deleteClub/:id",Verify,VerifyRole,deleteClub // #swagger.tags =
 
 
 // Get club by id == GET request
-clubRouter.get("/getClubById/:id",Verify,VerifyRole,getClubById// #swagger.tags = ['Admin/Clubs']
+clubRouter.get("/getClubById/:id",Verify,getClubById// #swagger.tags = ['Admin/Clubs']
 )
 
 
