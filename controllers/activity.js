@@ -7,7 +7,7 @@ import activities from "../models/Activity.js";
  */
 export async function AddActivity(req, res) {
     // get required variables from request body, using es6 object destructing
-    const { activity_name, coach_name, activity_date, activity_time_duration, room_id} = req.body;
+    const { activity_name, coach_name, activity_date, activity_time_duration, room_id, club_id} = req.body;
     try {
         // create an instance of an activity
         const newActivity = new activities({
@@ -15,10 +15,11 @@ export async function AddActivity(req, res) {
             coach_name,
             activity_date,
             activity_time_duration,
-            room_id
+            room_id,
+            club_id
         });
         // Check if activity already exists
-        const existingActivity = await activities.findOne({ activity_date, activity_time_duration });
+        const existingActivity = await activities.findOne({ activity_date: activity_date, activity_time_duration: activity_time_duration, club_id: club_id, room_id: room_id });
         if (existingActivity)
             return res.status(400).json({
                 status: "failed",
@@ -56,7 +57,7 @@ export async function EditActivity(req, res) {
         console.log(data)
         activities.updateOne({_id:data._id},{activity_name:req.body.activity_name, coach_name:req.body.coach_name, 
             activity_date:req.body.activity_date, activity_time_duration:req.body.activity_time_duration, 
-            participant_max:req.body.participant_max,participant_signin:req.body.participant_signin}).then(activity => {
+            participant_max:req.body.participant_max,participant_signin:req.body.participant_signin, club_id:req.body.club_id }).then(activity => {
             return res.status(200).json({
                 status: "success",
                 data: [activity],

@@ -6,6 +6,10 @@ const ActivitySchema = new mongoose.Schema(
             type: String,
             required: "room_id is required",
         },
+        club_id:{
+            type: String,
+            required: "club_id is required",
+        },
         activity_name: {
             type: String,
             required: "Your activity_name is required",

@@ -5,7 +5,7 @@ const doc = {
     title: 'Basic Cir API',
     description: 'API for basic cir blabla',  // by default: ''
   },
-  host:HOST+':'+PORT,
+  host:'apibacir.fly.dev',
   basePath: '/',  // by default: '/'
   schemes: ['http'],   // by default: ['http']
   consumes: ['application/json'],  // by default: ['application/json']

@@ -38,6 +38,12 @@ activityRouter.post("/add",VerifyAdmin,
         .withMessage("La salle est requise")
         .trim()
         .escape(),
+    check("club_id")
+        .not()
+        .isEmpty()
+        .withMessage("Le club est requise")
+        .trim()
+        .escape(),
     Validate,
     AddActivity
      //#swagger.tags = ['Admin/Activity']
@@ -81,6 +87,12 @@ activityRouter.post(
         .not()
         .isEmpty()
         .withMessage("Le nombre de participant est requis")
+        .trim()
+        .escape(),
+    check("club_id")
+        .not()
+        .isEmpty()
+        .withMessage("Le club est requise")
         .trim()
         .escape(),
     Validate,
