@@ -132,37 +132,71 @@ export async function deleteUserActivity(req, res){
 
 
 /**
- * @route get v1/user/isActive
+ * @route get v1/user/isActive/:id
  * @desc set user active
  * @access Public
  */
 export async function isActive(req, res){
-    let user = req.user;
-    user.isActive = true;
-    let updatedUser = await users.updateOne({_id:user._id},{isActive:true})
-    return res.status(200).json({
-        status: "success",
-        data: [updatedUser.isActive],
-        message: "Get ok "
-    });
+    const userId = req.params.id;
+
+    try {
+        const user = await users.findById(userId);
+        if (user) {
+            await users.updateOne({ _id: userId }, { isActive: true });
+            return res.status(200).json({
+                status: "success",
+                data: [true], // Assuming you want to return true when the user is set to active
+                message: "User set to active",
+            });
+        } else {
+            return res.status(404).json({
+                status: "failed",
+                data: [],
+                message: "User not found",
+            });
+        }
+    } catch (error) {
+        return res.status(500).json({
+            status: "error",
+            message: "Internal Server Error",
+        });
+    }
 }
 
 
+
 /**
- * @route get v1/user/isNotActive
+ * @route get v1/user/isNotActive/:id
  * @desc set user not active
  * @access Public
  */
 export async function isNotActive(req, res){
-    let user = req.user;
-    user.isActive = false;
-    let updatedUser = await users.updateOne({_id:user._id},{isActive:false})
-    return res.status(200).json({
-        status: "success",
-        data: [updatedUser.isActive],
-        message: "Get ok "
-    });
+    const userId = req.params.id;
+
+    try {
+        const user = await users.findById(userId);
+        if (user) {
+            await users.updateOne({ _id: userId }, { isActive: false });
+            return res.status(200).json({
+                status: "success",
+                data: [false], // Assuming you want to return false when the user is set to not active
+                message: "User set to not active",
+            });
+        } else {
+            return res.status(404).json({
+                status: "failed",
+                data: [],
+                message: "User not found",
+            });
+        }
+    } catch (error) {
+        return res.status(500).json({
+            status: "error",
+            message: "Internal Server Error",
+        });
+    }
 }
+
 
 
 /**
@@ -220,7 +254,7 @@ export async function getAllActivity(req, res){
  * @access Public
  */
 export async function getProfile(req, res){
-    const userID = req.body.userId;
+    const userID = req.params.id;
 
     try {
         const user = await users.findById(userID);

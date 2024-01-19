@@ -51,7 +51,7 @@ userRouter.get("/getLogs/:id", Verify, getLogs,
 
 // Get user infos route == GET request
 
-userRouter.get("/getProfile/:id",Verify, getProfile
+userRouter.get("/getProfile/:id", getProfile
     //#swagger.tags = ['Users/']
 )
 
@@ -63,11 +63,11 @@ userRouter.post("/deleteUserActivity", Verify, deleteUserActivity
     //#swagger.tags = ['Users/']
 )
 
-userRouter.get("/isActive", Verify, isActive
+userRouter.get("/isActive/:id", isActive
     //#swagger.tags = ['Users/']
 )
     
-userRouter.get("/isNotActive", Verify, isNotActive
+userRouter.get("/isNotActive/:id", isNotActive
     //#swagger.tags = ['Users/']
 )
 
