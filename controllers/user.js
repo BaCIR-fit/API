@@ -3,7 +3,7 @@ import { decrementRoom, incrementRoom } from "../controllers/room.js";
 import { decrementActivity, incrementActivity } from "../controllers/activity.js"
 import activities from "../models/Activity.js";
 import rooms from '../models/Room.js';
-import Clubs from '../models/Clubs.js';
+import clubs from '../models/Clubs.js';
 /**
  * @route GET v1/user/getLogs/:id/
  * @desc Get history of user
@@ -171,7 +171,12 @@ export async function isNotActive(req, res){
 export async function getActivity(req, res){
     try {
         const idClub = req.params.idClub;
-        const Act = await activities.findOne({ club_id: idClub });
+        let Act = await activities.find({ club_id: idClub });
+        if(Act.length == 0 || Act == null){
+            let tmp = await clubs.findOne({club_name: idClub})
+            Act = await activities.find({club_id:tmp.id});
+        }
+        // console.log(Act)
 
         return res.status(200).json({
             status: "success",
