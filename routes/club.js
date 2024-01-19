@@ -1,6 +1,4 @@
 import express from "express";
-import Validate from "../middleware/validate.js";
-import { check } from "express-validator";
 import Clubs from "../models/Clubs.js";
 import { addClub, deleteClub, editClub, getAllClubs, getClubById } from "../controllers/clubs.js";
 import { Verify, VerifyRole } from "../middleware/verify.js";

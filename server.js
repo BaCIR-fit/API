@@ -40,7 +40,9 @@ var corsOptionsDelegate = function (req, callback) {
   } else {
     corsOptions = { origin: false } // disable CORS for this request
   }
+  // console.log("here1")
   callback(null, corsOptions) // callback expects two parameters: error and options
+  // console.log("here2")
 }
 
 server.use(cors(corsOptionsDelegate))
