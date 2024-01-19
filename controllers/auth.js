@@ -86,7 +86,6 @@ export async function editProfile(req, res) {
 export async function Login(req, res) {
     // Get variables for the login process
     const { email,password } = req.body;
-    console.log(req.body)
     try {
         // Check if user exists
         const user = await users.findOne({ email }).select('+password').exec();
@@ -112,7 +111,7 @@ export async function Login(req, res) {
         }
 
         let options = {
-            maxAge: 20 * 60 * 1000, // would expire in 20minutes
+            // maxAge: 20 * 60 * 1000, // would expire in 20minutes
             httpOnly: true, // The cookie is only accessible by the web server
             secure: true,
             sameSite: "None",

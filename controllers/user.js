@@ -2,9 +2,10 @@ import users from '../models/User.js';
 import { decrementRoom, incrementRoom } from "../controllers/room.js";
 import { decrementActivity, incrementActivity } from "../controllers/activity.js"
 import activities from "../models/Activity.js";
-
+import rooms from '../models/Room.js';
+import Clubs from '../models/Clubs.js';
 /**
- * @route GET v1/user/getLog/:id/
+ * @route GET v1/user/getLogs/:id/
  * @desc Get history of user
  * @access Public
  */
@@ -33,9 +34,10 @@ export async function addLog(id, log_content){
         "workout_time" : log_content.workout_time,
         "workout_duration": log_content.workout_duration,
         "room_id": log_content.room_id,
+        "room_name":log_content.room_name,
+        "club_name":log_content.club_name
     }
     users.findOne({_id:id}).then(async function(user) {
-        console.log(user)
         user.logs.push(newLog);
         await users.updateOne({_id:id},{logs:user.logs})
     });
@@ -65,8 +67,11 @@ export async function deleteLog(id, activity){
 export async function addUserActivity(req, res){
     
     let user = req.user;
-    const {activity_id,workout_date, workout_time, workout_duration, room_id} = req.body;
-    let log_content = {activity_id, workout_date, workout_time, workout_duration, room_id}
+    const {activity_id,workout_date, workout_time, workout_duration, room_id,club_id} = req.body;
+    let room_name = await rooms.findOne({_id:room_id});
+    let club = await Clubs.findOne({_id:club_id});
+    let club_name = club.club_name;
+    let log_content = {activity_id, workout_date, workout_time, workout_duration, room_id,room_name,club_name}
 
     activities.findOne({_id: activity_id})
     .then(activity => {
@@ -160,21 +165,21 @@ export async function isNotActive(req, res){
  * @access Public
  */
 export async function getActivity(req, res){
-    const {idClub} = req.params;
+    try {
+        const { idClub } = req.params;
+        const activities = await Activity.find({ club_id: idClub }).exec();
 
-    activities.find({club_id: idClub})
-    .then(activities => {
         return res.status(200).json({
             status: "success",
-            data: [activities],
-            message: "Get ok "
+            data: activities,
+            message: "Get ok",
         });
-    }).catch((err) => {
+    } catch (err) {
         return res.status(400).json({
             status: "failed",
             message: "Erreur lors de la récupération des informations de l'activité: " + err,
         });
-    });
+    }
 }
 
 
