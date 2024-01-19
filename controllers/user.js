@@ -155,6 +155,7 @@ export async function isActive(req, res){
 export async function isNotActive(req, res){
     let user = req.user;
     user.isActive = false;
+    let updatedUser = await users.updateOne({_id:user._id},{isActive:false})
     return res.status(200).json({
         status: "success",
         data: [user.isActive],
