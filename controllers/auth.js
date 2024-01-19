@@ -12,7 +12,12 @@ import qrcode from "../models/QrCode.js";
  */
 export async function Register(req, res) {
     // get required variables from request body, using es6 object destructing
-    const { first_name, last_name, birth_date, gender, email, password} = req.body;
+    const first_name = req.body.Prenom;
+    const last_name = req.body.Nom;
+    const birth_date = req.body.date;
+    const gender = req.body.gender;
+    const email = req.body.Email;
+    const password = req.body.MotDePasse;
     try {
         // create an instance of a user
         let newUser = new users({
