@@ -34,7 +34,6 @@ adminApp.get("/",VerifyAdmin, (req,res) => {
 adminApp.get("/getAllUsers/:limit",VerifyAdmin,async function(req,res){
     // récupère tous les users
     users.find({}).limit(req.params.limit).then((data) => {
-        console.log("data : ",data)
         return res.status(200).json({
             status: "Success",
             data: data,

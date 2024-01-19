@@ -17,7 +17,7 @@ roomRouter.get(
 
 // get room by id == GET request
 roomRouter.get(
-    "/getRoom/:id", VerifyAdmin,
+    "/getRoom/:id",
     Validate,
     getRoom
     // #swagger.tags = ['Admin/Rooms']

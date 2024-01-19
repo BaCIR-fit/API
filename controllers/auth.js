@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import users from "../models/User.js";
 import Blacklist from '../models/Blacklist.js';
-import qrcodeModel from "../models/QrCode.js";
+import qrcode from "../models/QrCode.js";
 // REGISTER, EDIT, LOGIN & LOGOUT FUNCTIONS
 
 
